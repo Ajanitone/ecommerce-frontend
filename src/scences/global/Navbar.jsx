@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector, Provider } from "react-redux";
 import { Badge, Box, IconButton } from "@mui/material";
 import {
@@ -10,11 +10,17 @@ import {
 import { useNavigate } from "react-router-dom";
 import { shades } from "../../theme";
 import { setIsCartOpen } from "../../state";
+import ThemeButton from "../../components/ThemeButton";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
+
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
   return (
     <Box
       display="flex"
@@ -34,25 +40,30 @@ const Navbar = () => {
         display="flex"
         justifyContent="space-between"
         alignItems="center"
+        className={`home ${isDarkMode ? "dark-mode" : ""}`}
+        padding="10px"
+        borderRadius="10px"
       >
         <Box
           onClick={() => navigate("/")}
-          sx={{ "&:hover": { cursor: "pointer", color: "green" } }}
-          color={shades.secondary[500]}
+          sx={{ "&:hover": { cursor: "pointer", color: "black" } }}
+          color={!isDarkMode ? shades.secondary[500] : undefined}
+          className={`home ${isDarkMode ? "dark-mode" : ""}`}
         >
-          TrikaniaTea
+          TrikaniaHerbs
         </Box>
+
         <Box
           display="flex"
           justifyContent="space-between"
           columnGap="20px"
           zIndex="2"
         >
-          <IconButton sx={{ color: "black" }}>
+          <IconButton sx={{ color: isDarkMode ? "white" : "black" }}>
             <SearchOutlined />
           </IconButton>
 
-          <IconButton sx={{ color: "black" }}>
+          <IconButton sx={{ color: isDarkMode ? "white" : "black" }}>
             <PersonOutline />
           </IconButton>
 
@@ -71,16 +82,17 @@ const Navbar = () => {
             }}
           >
             <IconButton
-              sx={{ color: "black" }}
+              sx={{ color: isDarkMode ? "white" : "black" }}
               onClick={() => dispatch(setIsCartOpen({}))}
             >
               <ShoppingBagOutlined />
             </IconButton>
           </Badge>
 
-          <IconButton sx={{ color: "black" }}>
+          <IconButton sx={{ color: isDarkMode ? "white" : "black" }}>
             <MenuOutlined />
           </IconButton>
+          <ThemeButton toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
         </Box>
       </Box>
     </Box>

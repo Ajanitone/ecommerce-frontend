@@ -21,6 +21,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <ScrollToTop />
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="item/:itemId" element={<ItemDetails />} />
@@ -28,6 +29,7 @@ function App() {
           <Route path="checkout/success" element={<Confirmation />} />
         </Routes>
         <CartMenu />
+
         <Footer />
       </BrowserRouter>
     </div>

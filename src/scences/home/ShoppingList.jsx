@@ -4,7 +4,7 @@ import { Box, Typography, Tabs, Tab, useMediaQuery } from "@mui/material";
 import Item from "../../components/Item";
 import { setItems } from "../../state";
 
-const ShoppingList = () => {
+const ShoppingList = ({ isDarkMode }) => {
   const dispatch = useDispatch();
   const [value, setValue] = useState("all");
   const items = useSelector((state) => state.cart.items);
@@ -30,14 +30,12 @@ const ShoppingList = () => {
     getItems();
   }, []);
 
-  const topRatedItems = items.filter(
-    (item) => item.attributes.category === "topRated"
+  const TeaItems = items.filter((item) => item.attributes.category === "Tea");
+  const SpicesItems = items.filter(
+    (item) => item.attributes.category === "Spices"
   );
-  const newArrivalsItems = items.filter(
-    (item) => item.attributes.category === "newArrivals"
-  );
-  const bestSellersItems = items.filter(
-    (item) => item.attributes.category === "bestSellers"
+  const PepperSauceItems = items.filter(
+    (item) => item.attributes.category === "Pepper-sauce"
   );
 
   return (
@@ -54,10 +52,26 @@ const ShoppingList = () => {
         TabIndicatorProps={{ sx: { display: isNonMobile ? "block" : "none" } }}
         sx={{ m: "25px", "&.MuiTabs-flexContainer": { flexWrap: "wrap" } }}
       >
-        <Tab label="ALL" value="all" />
-        <Tab label="New Arrivals" value="newArrivals" />
-        <Tab label="Best Sellers" value="bestSellers" />
-        <Tab label="Top Rated" value="topRated" />
+        <Tab
+          label="ALL"
+          value="all"
+          sx={isDarkMode ? { color: "green" } : { color: "red" }}
+        />
+        <Tab
+          label="Tea"
+          value="Tea"
+          sx={isDarkMode ? { color: "white" } : { color: "red" }}
+        />
+        <Tab
+          label="Spices"
+          value="Spices"
+          sx={isDarkMode ? { color: "white" } : { color: "red" }}
+        />
+        <Tab
+          label="Pepper-sauce"
+          value="PepperSauce"
+          sx={isDarkMode ? { color: "white" } : { color: "red" }}
+        />
       </Tabs>
       <Box
         margin="0 auto"
@@ -71,16 +85,16 @@ const ShoppingList = () => {
           items.map((item) => (
             <Item item={item} key={`${item.name}-${item.id}`} />
           ))}
-        {value === "newArrivals" &&
-          newArrivalsItems.map((item) => (
+        {value === "Tea" &&
+          TeaItems.map((item) => (
             <Item item={item} key={`${item.name}-${item.id}`} />
           ))}
-        {value === "bestSellers" &&
-          bestSellersItems.map((item) => (
+        {value === "Spices" &&
+          SpicesItems.map((item) => (
             <Item item={item} key={`${item.name}-${item.id}`} />
           ))}
-        {value === "topRated" &&
-          topRatedItems.map((item) => (
+        {value === "PepperSauce" &&
+          PepperSauceItems.map((item) => (
             <Item item={item} key={`${item.name}-${item.id}`} />
           ))}
       </Box>

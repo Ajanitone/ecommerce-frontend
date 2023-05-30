@@ -26,7 +26,7 @@ const Footer = () => {
             mb="30px"
             color={shades.secondary[500]}
           >
-            TrikaniaTea
+            TrikaniaHerbs
           </Typography>
           <div> Ipsum Bipsum dipsum</div>
         </Box>
