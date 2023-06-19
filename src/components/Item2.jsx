@@ -8,7 +8,7 @@ import { shades } from "../theme";
 import { addToCart } from "../state";
 import { useNavigate } from "react-router-dom";
 
-const Item = ({ item, width }) => {
+const Item2 = ({ item, width }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -19,18 +19,6 @@ const Item = ({ item, width }) => {
     palette: { neutral },
   } = useTheme();
 
-  const { category, price, name, image } = item.attributes;
-
-  const {
-    data: {
-      attributes: {
-        formats: {
-          medium: { url },
-        },
-      },
-    },
-  } = image;
-
   return (
     <Box width={width}>
       <Box
@@ -40,10 +28,10 @@ const Item = ({ item, width }) => {
       >
         <img
           alt={item.name}
-          src={`http://localhost:1337${url}`}
+          src={item.profileImage}
           width="300px"
           height="400px"
-          onClick={() => navigate(`/item/${item.id}`)}
+          onClick={() => navigate(`/item/${item._id}`)}
           style={{
             cursor: "pointer",
             borderRadius: "10px",
@@ -89,17 +77,17 @@ const Item = ({ item, width }) => {
       </Box>
       <Box mt="3px">
         <Typography variant="subtitle2" color={shades.primary[500]}>
-          {category
-            ? category
+          {item.category
+            ? item.category
                 .replace(/([A-Z])/g, "$1")
                 .replace(/^./, (str) => str.toUpperCase())
             : ""}
         </Typography>
-        <Typography>{name}</Typography>
-        <Typography fontWeight="bold">{price} €</Typography>
+        <Typography>{item.name}</Typography>
+        <Typography fontWeight="bold">{item.price} €</Typography>
       </Box>
     </Box>
   );
 };
 
-export default Item;
+export default Item2;

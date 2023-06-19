@@ -12,6 +12,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import the da
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { shades } from "../../theme";
+import { useNavigate } from "react-router-dom";
 
 // import all image from assets folder
 
@@ -27,6 +28,7 @@ const heroTextureImports = importAll(
 const MainCarousel = ({ isDarkMode, toggleTheme }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
+  const navigate = useNavigate();
   return (
     <Carousel
       className={`home ${isDarkMode ? "dark-mode" : ""}`}
@@ -101,12 +103,12 @@ const MainCarousel = ({ isDarkMode, toggleTheme }) => {
             maxWidth={isNonMobile ? undefined : "240px"}
             className={isDarkMode ? "dark-mode" : ""}
           >
-            <Typography
+            {/* <Typography
               color={!isDarkMode ? shades.secondary[300] : "red"}
               className={isDarkMode ? "dark-mode" : ""}
             >
               -- NEW ITEMS
-            </Typography>
+            </Typography> */}
             <Typography fontSize={isNonMobile ? "3rem" : "20px"}>
               Herbs Of Healing
             </Typography>
@@ -116,6 +118,7 @@ const MainCarousel = ({ isDarkMode, toggleTheme }) => {
                 color={!isDarkMode ? shades.secondary[400] : "red"}
                 sx={{ textDecoration: "underline" }}
                 className={isDarkMode ? "dark-mode" : ""}
+                onClick={() => navigate("/herb-info")}
               >
                 Discover More
               </Typography>

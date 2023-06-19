@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import MainCarousel from "./MainCarousel";
-import ShoppingList from "./ShoppingList";
+import ShoppingList1 from "./ShoppingList1";
 import Subscribe from "./Subscribe";
 
 const Home = () => {
@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <div className={`home ${isDarkMode ? "dark-mode" : ""}`}>
       <MainCarousel isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
-      <ShoppingList isDarkMode={isDarkMode} />
+      <ShoppingList1 isDarkMode={isDarkMode} />
       <Subscribe isDarkMode={isDarkMode} />
     </div>
   );

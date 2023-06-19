@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Typography, Tabs, Tab, useMediaQuery } from "@mui/material";
-import Item2 from "../../components/Item";
+import Item2 from "../../components/Item2";
 import { setItems } from "../../state";
-
-const ShoppingList = ({ isDarkMode }) => {
+import { HerbContext } from "../../context/Context";
+import axios from "axios";
+const ShoppingList1 = ({ isDarkMode }) => {
   const dispatch = useDispatch();
   const [value, setValue] = useState("all");
   const items = useSelector((state) => state.cart.items);
@@ -15,27 +16,32 @@ const ShoppingList = ({ isDarkMode }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const { state, dispatchState } = useContext(HerbContext);
+  const [loading, setLoading] = useState(false);
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+  const [item, setItem] = useState(null);
 
-  async function getItems() {
-    const items = await fetch(
-      "http://localhost:1337/api/items?populate=image",
-      {
-        method: "GET",
-      }
-    );
-    const itemsJson = await items.json();
-    dispatch(setItems(itemsJson.data));
-  }
   useEffect(() => {
-    getItems();
+    async function getData() {
+      const response = await axios.get(baseUrl + "/products/listProduct");
+
+      console.log("getData", response);
+
+      if (response.data.success) {
+        dispatchState({
+          type: "loadProducts",
+          payload: response.data.products,
+        });
+        dispatch(setItems(response.data.products));
+      }
+    }
+    getData();
   }, []);
 
-  const TeaItems = items.filter((item) => item.attributes.category === "Tea");
-  const SpicesItems = items.filter(
-    (item) => item.attributes.category === "Spices"
-  );
+  const TeaItems = items.filter((item) => item.category === "Tea");
+  const SpicesItems = items.filter((item) => item.category === "Spices");
   const PepperSauceItems = items.filter(
-    (item) => item.attributes.category === "Pepper-sauce"
+    (item) => item.category === "Pepper-sauce"
   );
 
   return (
@@ -102,4 +108,4 @@ const ShoppingList = ({ isDarkMode }) => {
   );
 };
 
-export default ShoppingList;
+export default ShoppingList1;

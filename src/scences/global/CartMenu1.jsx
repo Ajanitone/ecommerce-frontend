@@ -25,9 +25,9 @@ const CartMenu = () => {
   const cart = useSelector((state) => state.cart.cart);
   const isCartOpen = useSelector((state) => state.cart.isCartOpen);
   const totalPrice = cart.reduce((total, item) => {
-    return total + item.count * item.price;
+    return total + item.count * item.attributes.price;
   }, 0);
-  console.log("cart", cart);
+
   return (
     // Overlay
     <Box
@@ -62,20 +62,22 @@ const CartMenu = () => {
           {/* Cart List */}
           <Box>
             {cart.map((item) => (
-              <Box key={`${item.name}-${item.id}`}>
+              <Box key={`${item.attributes.name}-${item.id}`}>
                 <FlexBox p="15px 0">
                   <Box flex="1 1 40%">
                     <img
                       alt={item?.name}
                       width="123px"
                       height="164px"
-                      src={`${item?.profileImage}`}
+                      src={`http://localhost:1337${item?.attributes?.image.data?.attributes.formats?.medium?.url}`}
                     />
                   </Box>
                   <Box flex="1 1 60%">
                     {/* ITEM NAME */}
                     <FlexBox mb="5px">
-                      <Typography fontWeight="bold">{item.name}</Typography>
+                      <Typography fontWeight="bold">
+                        {item.attributes.name}
+                      </Typography>
                       <IconButton
                         onClick={() =>
                           dispatch(removeFromCart({ id: item.id }))
@@ -84,7 +86,7 @@ const CartMenu = () => {
                         <CloseIcon />
                       </IconButton>
                     </FlexBox>
-                    <Typography>{item.description}</Typography>
+                    <Typography>{item.attributes.shortDescription}</Typography>
                     {/* Amount */}
                     <FlexBox m="15px 0">
                       <Box
@@ -109,7 +111,9 @@ const CartMenu = () => {
                         </IconButton>
                       </Box>
                       {/* PRICE */}
-                      <Typography fontWeight="bold">€{item.price}</Typography>
+                      <Typography fontWeight="bold">
+                        €{item.attributes.price}
+                      </Typography>
                     </FlexBox>
                   </Box>
                 </FlexBox>
@@ -132,7 +136,6 @@ const CartMenu = () => {
                 minWidth: "100%",
                 padding: "20px 40px",
                 m: "20px 0",
-                "&:hover": { color: shades.secondary[500] },
               }}
               onClick={() => {
                 navigate("/checkout");

@@ -1,23 +1,27 @@
 import { useSelector } from "react-redux";
 import { Box, Button, Stepper, Step, StepLabel } from "@mui/material";
 import { Formik } from "formik";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import * as yup from "yup";
 import { shades } from "../../theme";
 import Payment from "./Payment";
 import Shipping from "./Shipping";
 import { loadStripe } from "@stripe/stripe-js";
-
+import { HerbContext } from "../../context/Context";
+import axios from "axios";
 const stripePromise = loadStripe(
   "pk_live_51NCUdfHrkFOTAGN6EZmjUqJNgrG007O8eJCeE2NNsExjVrtQo0KIK0qJKhORU077FtfIfBTlFqoZNRsAPbkX5lMj006oXMN0Ny"
 );
 
 const Checkout = () => {
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const [activeStep, setActiveStep] = useState(0);
   const cart = useSelector((state) => state.cart.cart);
   const isFirstStep = activeStep === 0;
   const isSecondStep = activeStep === 1;
+  const { state } = useContext(HerbContext);
 
+  const userId = state.user._id;
   const handleFormSubmit = async (values, actions) => {
     setActiveStep(activeStep + 1);
 
@@ -30,7 +34,7 @@ const Checkout = () => {
     }
 
     if (isSecondStep) {
-      makePayment(values);
+      makePayment1(values, cart);
     }
 
     actions.setTouched({});
@@ -56,6 +60,40 @@ const Checkout = () => {
     await stripe.redirectToCheckout({
       sessionId: session.id,
     });
+  }
+
+  async function makePayment1(values, cart) {
+    const stripe = await stripePromise;
+
+    try {
+      const requestBody = {
+        userName: [
+          values.billingAddress.firstName,
+          values.billingAddress.lastName,
+        ].join(" "),
+        email: values.email,
+        products: cart.map(({ _id, count }) => ({
+          _id,
+          count,
+        })),
+        user: userId, // Replace YOUR_USER_ID with the actual user._id from your authentication state
+      };
+
+      const response = await axios.post(
+        baseUrl + "/payments/create-checkout-session",
+        requestBody,
+        { withCredentials: true }
+      );
+      const session = response.data;
+
+      await stripe.redirectToCheckout({
+        sessionId: session.sessionId, // Pass the sessionId obtained from the server
+      });
+    } catch (error) {
+      console.error("Error making payment:", error);
+      alert("payment error");
+      // Handle the error appropriately
+    }
   }
 
   return (
