@@ -1,12 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Box, Typography, IconButton, InputBase, Button } from "@mui/material";
-import FilterVintageIcon from "@mui/icons-material/FilterVintage";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useContext, useRef,useEffect } from "react";
+import {
+  Box,
+  Typography,
+  IconButton,
+  InputBase,
+  Button,
+  Popover,
+} from "@mui/material";
+
 import { HerbContext } from "../../context/Context";
 
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { ColorRing } from "react-loader-spinner";
+import Logo from "../../logo/TRI_Logo_Herbs_RedBlack+Face.png";
 
 <ColorRing
   visible={true}
@@ -22,6 +29,14 @@ const LogIn = ({ isDarkMode }) => {
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const [loading, setLoading] = useState(false);
   const { dispatchState } = useContext(HerbContext);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const [errorPopoverOpen, setErrorPopoverOpen] = useState(false);
+  const errorPopoverAnchorRef = useRef(null);
+  const getAnchorPosition = (anchorEl) => {
+    const rect = anchorEl.getBoundingClientRect();
+    return { top: rect.top, left: rect.left };
+  };
 
   const [data, setData] = useState({
     emailOrUsername: "",
@@ -29,23 +44,6 @@ const LogIn = ({ isDarkMode }) => {
   });
   const navigate = useNavigate();
 
-  // const handleLogin = async () => {
-  //   setLoading(true);
-  //   const response = await axios.post(baseUrl + "/users/login", data, {
-  //     withCredentials: true,
-  //   });
-  //   console.log("handleLogin response:", response, response.data.token);
-
-  //   if (response.data.success) {
-  //     dispatchState({
-  //       type: "saveProfile",
-  //       payload: response.data.user,
-  //     });
-
-  //     setLoading(false);
-  //     navigate("/");
-  //   }
-  // };
   const handleLogin = async () => {
     setLoading(true);
 
@@ -62,6 +60,11 @@ const LogIn = ({ isDarkMode }) => {
       console.log("handleLogin response:", response, response.data.token);
 
       if (response.data.success) {
+
+         // Store the token in local storage
+  localStorage.setItem('token', response.data.token);
+        setErrorMessage("Login  success");
+        setErrorPopoverOpen(true); // Open the error Popover
         dispatchState({
           type: "saveProfile",
           payload: response.data.user,
@@ -69,6 +72,9 @@ const LogIn = ({ isDarkMode }) => {
 
         setLoading(false);
         navigate("/");
+      } else {
+        setErrorMessage("Login failed. Please try again.");
+        setErrorPopoverOpen(true); // Open the error Popover
       }
     } catch (error) {
       console.error("Error during login:", error);
@@ -82,6 +88,20 @@ const LogIn = ({ isDarkMode }) => {
       [e.target.name]: e.target.value,
     });
   };
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Enter') {
+        handleLogin();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleLogin]);
   const backgroundColor = isDarkMode ? "#000000" : "rgba(242, 38, 19, 0.4)";
   return (
     <Box
@@ -100,6 +120,7 @@ const LogIn = ({ isDarkMode }) => {
         position: "relative", // Add position relative
         overflow: "hidden", // Add overflow hidden
       }}
+      ref={errorPopoverAnchorRef}
     >
       {/* Add gradient border pseudo-element */}
       <Box
@@ -120,9 +141,14 @@ const LogIn = ({ isDarkMode }) => {
         }}
       />
       <IconButton>
-        <FilterVintageIcon
+        {/* <FilterVintageIcon
           fontSize="large"
           sx={{ color: isDarkMode ? "rgba(200, 9, 9, 0.4)" : "white" }}
+        /> */}
+        <img
+          src={Logo}
+          alt="web-logo"
+          style={{ width: "30px", height: "30px", borderRadius: "50%" }}
         />
       </IconButton>
       <Typography variant="h3">Log-in</Typography>
@@ -208,6 +234,26 @@ const LogIn = ({ isDarkMode }) => {
             Sign Up
           </Button>
         </Link>
+        <Popover
+          open={errorPopoverOpen}
+          anchorEl={errorPopoverAnchorRef.current}
+          onClose={() => setErrorPopoverOpen(false)}
+          anchorReference="anchorEl"
+          // anchorPosition={{ top: 100, left: 400 }}
+          anchorPosition={
+            (errorPopoverAnchorRef.current &&
+              getAnchorPosition(errorPopoverAnchorRef.current)) || {
+              top: 100,
+              left: 400,
+            }
+          }
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "center",
+          }}
+        >
+          <div style={{ padding: "20px" }}>{errorMessage}</div>
+        </Popover>
       </Box>
     </Box>
   );

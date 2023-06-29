@@ -1,0 +1,215 @@
+.about-h1 {
+  color: rgb(223, 2, 2);
+  font-size: 2.5rem;
+  font-family: "Albert Sans", sans-serif;
+}
+.about-scroller {
+  height: 1.2em;
+  line-height: 1.2em;
+  position: relative;
+  overflow: hidden;
+  width: 400px;
+  padding: 1px;
+}
+.about-scroller1 {
+  height: 1.2em;
+  line-height: 1.2em;
+  position: relative;
+  overflow: hidden;
+  width: 400px;
+  padding: 2px;
+  color: white;
+}
+.about-scroller > span {
+  position: absolute;
+  top: 0;
+  animation: slide 10s infinite;
+  font-weight: bold;
+  color: black;
+  font-size: 2rem;
+  font-family: "Albert Sans", sans-serif;
+}
+.about-scroller1 > span {
+  position: absolute;
+  top: 0;
+  animation: slide 10s infinite;
+  font-weight: bold;
+  color: white;
+  font-size: 2rem;
+  font-family: "Albert Sans", sans-serif;
+}
+@keyframes slide {
+  0% {
+    top: 0;
+  }
+  25% {
+    top: -1.2em;
+  }
+  50% {
+    top: -2.4em;
+  }
+  75% {
+    top: -3.6em;
+  }
+}
+
+/* @media only screen and (min-width: 160px) {
+  .about-scroller-container {
+    height: 150px;
+    margin-top: 200px;
+  }
+  .about-h1 {
+    font-size: 40px;
+  }
+  .about-scroller > span {
+    font-size: 40px;
+  }
+}
+@media only screen and (min-width: 360px) {
+  .about-scroller-container {
+    height: 150px;
+    margin-top: 200px;
+  }
+  .about-h1 {
+    font-size: 40px;
+  }
+  .about-scroller > span {
+    font-size: 40px;
+  }
+}
+@media only screen and (min-width: 375px) {
+  .about-scroller-container {
+    height: 150px;
+    margin-top: 250px;
+  }
+  .about-h1 {
+    font-size: 40px;
+  }
+  .about-scroller > span {
+    font-size: 40px;
+  }
+}
+@media only screen and (min-width: 390px) {
+  .about-scroller-container {
+    height: 150px;
+    margin-top: 200px;
+  }
+  .about-h1 {
+    font-size: 40px;
+  }
+  .about-scroller > span {
+    font-size: 40px;
+  }
+  .contact-box {
+  }
+}
+
+@media only screen and (min-width: 414px) {
+  .about-scroller-container {
+    height: 150px;
+    margin-top: 200px;
+  }
+  .about-h1 {
+    font-size: 40px;
+  }
+  .about-scroller > span {
+    font-size: 40px;
+  }
+  .contact-box {
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  .about-scroller-container {
+    height: 150px;
+    margin-top: 200px;
+  }
+  .about-h1 {
+    font-size: 3rem;
+  }
+  .about-scroller > span {
+    font-size: 3rem;
+  }
+  .contact-box {
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .about-scroller-container {
+    height: 150px;
+    margin-top: 220px;
+  }
+  .about-h1 {
+    font-size: 4rem;
+  }
+  .about-scroller > span {
+    font-size: 4rem;
+  }
+  .contact-box {
+  }
+}
+@media only screen and (min-width: 820px) {
+  .about-scroller-container {
+    height: 150px;
+    margin-top: 220px;
+  }
+  .about-h1 {
+    font-size: 4rem;
+  }
+  .about-scroller > span {
+    font-size: 4rem;
+  }
+  .about-box {
+  }
+}
+
+@media only screen and (min-width: 912px) {
+  .about-scroller-container {
+    height: 150px;
+    margin-top: 250px;
+  }
+  .about-h1 {
+    font-size: 5rem;
+  }
+  .about-scroller > span {
+    font-size: 5rem;
+  }
+  .about-box {
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .about -scroller-container {
+    height: 150px;
+  }
+  .about -h1 {
+    font-size: 1rem;
+  }
+  .about -scroller > span {
+    font-size: 5rem;
+  }
+  .about -box {
+    padding-bottom: 150px;
+  }
+}
+
+@media only screen and (min-width: 1080px) {
+  .about-scroller-container {
+    height: 150px;
+    margin-top: 250px;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .about-scroller-container {
+    height: 150px;
+    margin-top: 250px;
+  }
+  .about-h1 {
+    font-size: 5rem;
+  }
+  .about -scroller > span {
+    font-size: 5rem;
+  }
+  .about -box {
+  }
+} */

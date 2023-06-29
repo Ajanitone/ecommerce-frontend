@@ -1,6 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Badge, Box, IconButton, Typography, InputBase } from "@mui/material";
+import {
+  Badge,
+  Box,
+  IconButton,
+  Typography,
+  InputBase,
+  useMediaQuery,
+  Popover,
+} from "@mui/material";
 import {
   PersonOutline,
   ShoppingBagOutlined,
@@ -21,7 +29,7 @@ import ExitToAppSharpIcon from "@mui/icons-material/ExitToAppSharp";
 import MeetingRoomSharpIcon from "@mui/icons-material/MeetingRoomSharp";
 import PopOver2 from "../../components/popover/PopOver2";
 import Logo from "../../logo/TRI_Logo_Herbs_RedBlack+Face.png";
-import { borderRadius } from "@mui/system";
+
 const Navbar = ({ isDarkMode, toggleTheme }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -37,7 +45,16 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
   const toggleShow = () => setStaticModal(!staticModal);
   const open = Boolean(anchorEl);
   const [searchValue, setSearchValue] = useState("");
+  const isNonMobile = useMediaQuery("(min-width:600px)");
 
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const [errorPopoverOpen, setErrorPopoverOpen] = useState(false);
+  const errorPopoverAnchorRef = useRef(null);
+  const getAnchorPosition = (anchorEl) => {
+    const rect = anchorEl.getBoundingClientRect();
+    return { top: rect.top, left: rect.left };
+  };
   const handleSearch = async () => {
     if (searchValue.trim() === "") {
       // If searchValue is empty or contains only whitespace, return or display an error message
@@ -84,7 +101,9 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
     });
 
     if (response.status === 200) {
-      alert("You are logged out");
+      // alert("You are logged out");
+      setErrorMessage("Logout  successfully");
+      setErrorPopoverOpen(true); // Open the error Popover
 
       setSuccess(true);
       handleClick();
@@ -96,11 +115,6 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
       console.log("error logging in");
     }
   };
-
-  // const [isDarkMode, setIsDarkMode] = useState(false);
-  // const toggleTheme = () => {
-  //   setIsDarkMode(!isDarkMode);
-  // };
 
   return (
     <Box
@@ -114,9 +128,17 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
       top="0"
       left="0"
       zIndex="1"
+      sx={{
+        "&:hover": { cursor: "pointer", color: shades.secondary[500] },
+        display: isNonMobile ? "flex" : "block",
+      }}
+      ref={errorPopoverAnchorRef}
     >
       <Box
-        sx={{ "&:hover": { cursor: "pointer", color: shades.secondary[500] } }}
+        sx={{
+          "&:hover": { cursor: "pointer", color: shades.secondary[500] },
+          display: isNonMobile ? "block" : "none",
+        }}
         color={!isDarkMode ? shades.primary[500] : undefined}
         title="username"
       >
@@ -139,7 +161,6 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
             "&:hover": { cursor: "pointer", color: shades.primary[300] },
           }}
           color={!isDarkMode ? shades.secondary[500] : shades.primary[100]}
-          className={`home ${isDarkMode ? "dark-mode" : ""}`}
           title="trikania-herbs"
         >
           <img
@@ -152,7 +173,9 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
               marginLeft: "5px",
             }}
           />
-          <Typography>TrikaniaHerbs</Typography>
+          <Typography sx={{ display: isNonMobile ? "block" : "none" }}>
+            TrikaniaHerbs
+          </Typography>
         </Box>
 
         <Box
@@ -373,6 +396,27 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
           colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
         />
       )}
+
+      <Popover
+        open={errorPopoverOpen}
+        anchorEl={errorPopoverAnchorRef.current}
+        onClose={() => setErrorPopoverOpen(false)}
+        anchorReference="anchorEl"
+        // anchorPosition={{ top: 100, left: 400 }}
+        anchorPosition={
+          (errorPopoverAnchorRef.current &&
+            getAnchorPosition(errorPopoverAnchorRef.current)) || {
+            top: 100,
+            left: 400,
+          }
+        }
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        <div style={{ padding: "20px" }}>{errorMessage}</div>
+      </Popover>
     </Box>
   );
 };

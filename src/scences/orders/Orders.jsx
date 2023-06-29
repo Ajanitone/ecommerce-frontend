@@ -1,50 +1,39 @@
-import React, { useState, useContext, useEffect } from "react";
-import {
-  Box,
-  Typography,
-  IconButton,
-  InputBase,
-  Button,
-  useMediaQuery,
-} from "@mui/material";
-import FilterVintageIcon from "@mui/icons-material/FilterVintage";
+import React, { useState, useContext, useEffect, useRef } from "react";
+import { Box, useMediaQuery } from "@mui/material";
+
 import { HerbContext } from "../../context/Context";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ColorRing } from "react-loader-spinner";
-
+import { Popover } from "@mui/material";
 import axios from "axios";
-import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
-import DeleteSweepOutlinedIcon from "@mui/icons-material/DeleteSweepOutlined";
-import { styled } from "@mui/system";
-import Item3 from "../../components/Item3";
-import { ProductionQuantityLimits } from "@mui/icons-material";
 
+import Item3 from "../../components/Item3";
+
+<ColorRing
+  visible={true}
+  height="80"
+  width="80"
+  ariaLabel="blocks-loading"
+  wrapperStyle={{}}
+  wrapperClass="blocks-wrapper"
+  colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+/>;
 const Orders = () => {
   const { state, dispatchState } = useContext(HerbContext);
   const [loading, setLoading] = useState(false);
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const [errorPopoverOpen, setErrorPopoverOpen] = useState(false);
+  const errorPopoverAnchorRef = useRef(null);
+  const getAnchorPosition = (anchorEl) => {
+    const rect = anchorEl.getBoundingClientRect();
+    return { top: rect.top, left: rect.left };
+  };
   console.log("orders", state.orders);
   const [isHovered, setIsHovered] = useState(false);
-
-  // Define a styled component with custom CSS
-  const HoverIcon = styled(EditNoteOutlinedIcon)`
-    font-size: 30px;
-    transition: color 0.3s; /* Add a transition for a smooth effect */
-
-    &:hover {
-      color: red; /* Set the desired color on hover */
-    }
-  `;
-  const HoverIcon1 = styled(DeleteSweepOutlinedIcon)`
-    font-size: 30px;
-    transition: color 0.3s; /* Add a transition for a smooth effect */
-
-    &:hover {
-      color: red; /* Set the desired color on hover */
-    }
-  `;
 
   const navigate = useNavigate();
 
@@ -72,10 +61,13 @@ const Orders = () => {
     console.log("^handleDelete ~ response", response);
 
     if (response.data.success)
-      dispatchState({
-        type: "removeOrder",
-        payload: id,
-      });
+      setErrorMessage("Your Order was deleted successfully");
+    setErrorPopoverOpen(true);
+    dispatchState({
+      type: "removeOrder",
+      payload: id,
+    });
+    setLoading(false);
     return;
   };
 
@@ -103,16 +95,41 @@ const Orders = () => {
       onMouseOver={() => setIsHovered(true)}
       onMouseOut={() => setIsHovered(false)}
       display="flex"
+      ref={errorPopoverAnchorRef}
     >
-      {state.orders &&
-        state?.orders?.map((item) => (
-          <Item3
-            item={item}
-            width={300}
-            handleDelete={handleDelete}
-            id={item._id}
-          />
-        ))}
+      {loading ? (
+        <ColorRing />
+      ) : (
+        <Box>
+          {state.orders &&
+            state?.orders?.map((item) => (
+              <Item3
+                item={item}
+                width={300}
+                handleDelete={handleDelete}
+                id={item._id}
+              />
+            ))}
+        </Box>
+      )}
+      <Popover
+        open={errorPopoverOpen}
+        anchorEl={errorPopoverAnchorRef.current}
+        onClose={() => setErrorPopoverOpen(false)}
+        anchorReference="anchorEl"
+        // anchorPosition={{ top: 100, left: 400 }}
+        anchorPosition={
+          (errorPopoverAnchorRef.current &&
+            getAnchorPosition(errorPopoverAnchorRef.current)) ||
+          undefined
+        }
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        <div style={{ padding: "20px" }}>{errorMessage}</div>
+      </Popover>
     </Box>
   );
 };

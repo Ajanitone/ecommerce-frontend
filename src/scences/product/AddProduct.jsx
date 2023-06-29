@@ -1,12 +1,20 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { HerbContext } from "../../context/Context";
 import axios from "axios";
 import { ColorRing } from "react-loader-spinner";
-import { Box, Typography, IconButton, InputBase, Button } from "@mui/material";
+import {
+  Box,
+  Typography,
+  IconButton,
+  InputBase,
+  Button,
+  Popover,
+} from "@mui/material";
 import FilterVintageIcon from "@mui/icons-material/FilterVintage";
 import profilePicture from "../../assets/angele-kamp-kcvRHtAyuig-unsplash.jpg";
+import Logo from "../../logo/TRI_Logo_Herbs_RedBlack+Face.png";
 
 <ColorRing
   visible={true}
@@ -28,6 +36,15 @@ const AddProduct = () => {
     url: "",
     file: null,
   });
+
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const [errorPopoverOpen, setErrorPopoverOpen] = useState(false);
+  const errorPopoverAnchorRef = useRef(null);
+  const getAnchorPosition = (anchorEl) => {
+    const rect = anchorEl.getBoundingClientRect();
+    return { top: rect.top, left: rect.left };
+  };
 
   useEffect(() => {
     if (!state.user.isAdmin) navigate("/");
@@ -87,6 +104,8 @@ const AddProduct = () => {
 
     if (response.data.success) {
       setLoading(false);
+      setErrorMessage("Product added");
+      setErrorPopoverOpen(true);
       dispatchState({
         type: "addProduct",
         payload: response.data.product,
@@ -111,6 +130,7 @@ const AddProduct = () => {
         position: "relative", // Add position relative
         overflow: "hidden", // Add overflow hidden
       }}
+      ref={errorPopoverAnchorRef}
     >
       {/* Add gradient border pseudo-element */}
       <Box
@@ -130,9 +150,10 @@ const AddProduct = () => {
         }}
       />
       <IconButton>
-        <FilterVintageIcon
-          fontSize="large"
-          sx={{ color: "rgba(207, 9, 9, 0.4)" }}
+        <img
+          src={Logo}
+          alt="web-logo"
+          style={{ width: "30px", height: "30px", borderRadius: "50%" }}
         />
       </IconButton>
       <Typography variant="h3">Add-Product</Typography>
@@ -282,6 +303,24 @@ const AddProduct = () => {
           </Button>
         )}
       </Box>
+      <Popover
+        open={errorPopoverOpen}
+        anchorEl={errorPopoverAnchorRef.current}
+        onClose={() => setErrorPopoverOpen(false)}
+        anchorReference="anchorEl"
+        // anchorPosition={{ top: 100, left: 400 }}
+        anchorPosition={
+          (errorPopoverAnchorRef.current &&
+            getAnchorPosition(errorPopoverAnchorRef.current)) ||
+          undefined
+        }
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        <div style={{ padding: "20px" }}>{errorMessage}</div>
+      </Popover>
     </Box>
   );
 };

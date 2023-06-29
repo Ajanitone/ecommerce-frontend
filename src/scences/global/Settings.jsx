@@ -180,6 +180,36 @@ const Settings = ({ isDarkMode }) => {
           </Button>
         )}
       </Box>
+      <Box
+        p="4px 4px"
+        m="15px auto"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        width="75%"
+        backgroundColor="#F2F2F2"
+        sx={{ borderRadius: "5px", marginTop: "70px" }} // Add borderRadius style
+      >
+        {loading ? (
+          <ColorRing />
+        ) : (
+          <Button
+            className="w-100 mb-4"
+            size="md"
+            onClick={() => navigate("/newsletter")}
+            sx={{
+              width: "50%",
+              background:
+                "linear-gradient(to right, rgba(100, 9, 9, 0.2), #f5f3f4)",
+              marginTop: "10px",
+              color: "red",
+              "&:hover": { color: "white" },
+            }}
+          >
+            Newsletter
+          </Button>
+        )}
+      </Box>
     </Box>
   );
 };

@@ -138,6 +138,25 @@ function ContextProvider({ children }) {
           ...state,
           orders: [...oldOrders],
         };
+      case "addNewsletter":
+        return {
+          ...state,
+          newsletters: [...state.newsletters, action.payload],
+        };
+      case "loadNewsletters":
+        return {
+          ...state,
+          newsletters: [...action.payload],
+        };
+      case "removeNewsletters":
+        // filter state (newsletters) to remove the deleted newsletter
+        const oldNewsletters = [
+          ...state.newsletters.filter((item) => item._id !== action.payload),
+        ];
+        return {
+          ...state,
+          newsletters: [...oldNewsletters],
+        };
 
       default:
         return state;
@@ -166,6 +185,7 @@ function ContextProvider({ children }) {
     cart: [],
     users: [],
     orders: [],
+    newsletters: [],
   };
 
   const [state, dispatchState] = useReducer(reducer, reset);

@@ -8,8 +8,8 @@ import {
   Checkbox,
   Divider,
 } from "@mui/material";
-import FilterVintageIcon from "@mui/icons-material/FilterVintage";
 
+import Logo from "../../logo/TRI_Logo_Herbs_RedBlack+Face.png";
 import { HerbContext } from "../../context/Context";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -120,7 +120,6 @@ const EditProfile = () => {
       console.log("handleSave~ response", response);
 
       if (response.data.success) {
-        // const profileImageURL = response.data.profileImageURL;
         setLoading(false);
 
         dispatchState({
@@ -189,9 +188,10 @@ const EditProfile = () => {
         }}
       />
       <IconButton>
-        <FilterVintageIcon
-          fontSize="large"
-          sx={{ color: "rgba(207, 9, 9, 0.4)" }}
+        <img
+          src={Logo}
+          alt="web-logo"
+          style={{ width: "30px", height: "30px", borderRadius: "50%" }}
         />
       </IconButton>
       <Typography variant="h3">Edit</Typography>
@@ -382,7 +382,7 @@ const EditProfile = () => {
         sx={{ borderRadius: "5px" }}
         justifyContent="center"
       >
-        {/* <Checkbox
+        <Checkbox
           label="admin?"
           placeholder="admin"
           id="form1"
@@ -391,7 +391,7 @@ const EditProfile = () => {
           checked={data.isAdmin}
           onChange={handleChange}
           title="admin?"
-        /> */}
+        />
         {renderAdminField()}
         <Divider sx={{ height: 28, m: 1 }} orientation="vertical" flexItem />
         {loading ? (

@@ -110,15 +110,14 @@ const MainCarousel = ({ isDarkMode, toggleTheme }) => {
               -- NEW ITEMS
             </Typography> */}
             <Typography fontSize={isNonMobile ? "3rem" : "20px"}>
-              Herbs Of Healing
+              Herbs of healing
             </Typography>
-            <Button>
+            <Button onClick={() => navigate("/herb-info")}>
               <Typography
                 fontWeight="bold"
                 color={!isDarkMode ? shades.secondary[400] : "red"}
                 sx={{ textDecoration: "underline" }}
                 className={isDarkMode ? "dark-mode" : ""}
-                onClick={() => navigate("/herb-info")}
               >
                 Discover More
               </Typography>

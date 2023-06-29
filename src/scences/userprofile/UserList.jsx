@@ -1,44 +1,56 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Box, Typography, IconButton, InputBase, Button } from "@mui/material";
-import FilterVintageIcon from "@mui/icons-material/FilterVintage";
+import React, { useState, useContext, useEffect,useRef } from "react";
+import { Box,  InputBase, Button ,Popover} from "@mui/material";
 import { HerbContext } from "../../context/Context";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate,  } from "react-router-dom";
 import { ColorRing } from "react-loader-spinner";
 import profilePicture from "../../assets/angele-kamp-kcvRHtAyuig-unsplash.jpg";
 import axios from "axios";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteSweepOutlinedIcon from "@mui/icons-material/DeleteSweepOutlined";
 import { styled } from "@mui/system";
-import Input from "../../components/Input";
 
-const UserProfile = ({ isDarkMode }) => {
+const HoverIcon = styled(EditNoteOutlinedIcon)`
+  font-size: 15px;
+  transition: color 0.3s; /* Add a transition for a smooth effect */
+
+  &:hover {
+    color: red; /* Set the desired color on hover */
+  }
+`;
+const HoverIcon1 = styled(DeleteSweepOutlinedIcon)`
+  font-size: 15px;
+  transition: color 0.3s; /* Add a transition for a smooth effect */
+
+  &:hover {
+    color: red; /* Set the desired color on hover */
+  }
+`;
+
+
+
+const UserList = ({ isDarkMode }) => {
   const { state, dispatchState } = useContext(HerbContext);
   const [loading, setLoading] = useState(false);
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const id = state.user._id;
   console.log("users", state.users);
   const [isHovered, setIsHovered] = useState(false);
+  const [editedUser, setEditedUser] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
 
-  // Define a styled component with custom CSS
-  const HoverIcon = styled(EditNoteOutlinedIcon)`
-    font-size: 15px;
-    transition: color 0.3s; /* Add a transition for a smooth effect */
+  const [errorPopoverOpen, setErrorPopoverOpen] = useState(false);
+  const errorPopoverAnchorRef = useRef(null);
+  const getAnchorPosition = (anchorEl) => {
+    const rect = anchorEl.getBoundingClientRect();
+    return { top: rect.top, left: rect.left };
+  };
 
-    &:hover {
-      color: red; /* Set the desired color on hover */
-    }
-  `;
-  const HoverIcon1 = styled(DeleteSweepOutlinedIcon)`
-    font-size: 15px;
-    transition: color 0.3s; /* Add a transition for a smooth effect */
-
-    &:hover {
-      color: red; /* Set the desired color on hover */
-    }
-  `;
-  const backgroundColor = isDarkMode ? "#000000" : "rgba(242, 38, 19, 0.4)";
+  const handleEdit = (user) => {
+    setEditedUser(user);
+  };
 
   const navigate = useNavigate();
+
   const handleDelete = async (id) => {
     setLoading(true);
     const response = await axios.delete(baseUrl + "/users/delete/" + id, {
@@ -47,11 +59,13 @@ const UserProfile = ({ isDarkMode }) => {
     console.log("^handleDelete ~ response", response);
 
     if (response.data.success) setLoading(false);
+    setErrorMessage("User deleted  ");
+    setErrorPopoverOpen(true); // Open the error Popover
     dispatchState({
-      type: "logout",
-      // payload: id,
+      type: "removeUser",
+      payload: id,
     });
-    alert("Your account was deleted successfully");
+  
     return;
   };
 
@@ -80,6 +94,7 @@ const UserProfile = ({ isDarkMode }) => {
       {state.users &&
         state.users.map((user) => (
           <Box
+            key={user._id}
             className={`home ${isDarkMode ? "dark-mode" : ""}`}
             padding="10px"
             width="75%"
@@ -89,7 +104,9 @@ const UserProfile = ({ isDarkMode }) => {
             sx={{
               background: "hsla(0, 0%, 100%, 0.55)",
               backdropFilter: "blur(30px)",
-              backgroundColor: backgroundColor,
+              backgroundColor: isDarkMode
+                ? "#000000"
+                : "rgba(242, 38, 19, 0.4)",
               borderRadius: "10px",
               boxShadow: "0 2px 4px rgba(1, 1, 1, 0.1)",
               border: "none",
@@ -98,7 +115,7 @@ const UserProfile = ({ isDarkMode }) => {
             }}
             position="relative"
             onMouseOver={() => setIsHovered(true)}
-            onMouseOut={() => setIsHovered(false)}
+            onMouseOut={() => setIsHovered(false)} ref={errorPopoverAnchorRef}
           >
             <Box
               position="absolute"
@@ -145,15 +162,27 @@ const UserProfile = ({ isDarkMode }) => {
                 id="form1"
                 type="text"
                 name="firstName"
-                value={user.firstName}
-              />{" "}
+                value={editedUser.firstName || user.firstName}
+                onChange={(e) =>
+                  setEditedUser({
+                    ...editedUser,
+                    firstName: e.target.value,
+                  })
+                }
+              />
               <InputBase
                 sx={{ ml: 1, flex: 1 }}
                 placeholder="Lastname"
                 id="form1"
                 type="text"
                 name="lastName"
-                value={user.lastName}
+                value={editedUser.lastName || user.lastName}
+                onChange={(e) =>
+                  setEditedUser({
+                    ...editedUser,
+                    lastName: e.target.value,
+                  })
+                }
               />
             </Box>
 
@@ -173,7 +202,13 @@ const UserProfile = ({ isDarkMode }) => {
                 id="form1"
                 type="text"
                 name="username"
-                value={user.username}
+                value={editedUser.username || user.username}
+                onChange={(e) =>
+                  setEditedUser({
+                    ...editedUser,
+                    email: e.target.value,
+                  })
+                }
               />
             </Box>
             <Box
@@ -192,7 +227,13 @@ const UserProfile = ({ isDarkMode }) => {
                 id="form1"
                 type="text"
                 name="username"
-                value={user.email}
+                value={editedUser.email || user.email}
+                onChange={(e) =>
+                  setEditedUser({
+                    ...editedUser,
+                    email: e.target.value,
+                  })
+                }
               />
             </Box>
             <Box
@@ -211,7 +252,13 @@ const UserProfile = ({ isDarkMode }) => {
                 id="form1"
                 type="text"
                 name="username"
-                value={user.phone}
+                value={editedUser.phone || user.phone}
+                onChange={(e) =>
+                  setEditedUser({
+                    ...editedUser,
+                    phone: e.target.value,
+                  })
+                }
               />
             </Box>
 
@@ -240,10 +287,14 @@ const UserProfile = ({ isDarkMode }) => {
                   ]}
                 />
               ) : (
+                ""
+              )}
+              {user._id !== id && (
                 <Button
                   title="edit-user"
                   size="md"
                   onClick={() => {
+                    handleEdit(user);
                     navigate("/editprofile");
                   }}
                   sx={{
@@ -282,13 +333,14 @@ const UserProfile = ({ isDarkMode }) => {
                     "#849b87",
                   ]}
                 />
-              ) : <div className="d-flex justify-content-between mx-4 mb-4">
-                  <p>Are you sure you want to delete your account?</p>
-                </div> ? (
+              ) : (
+                ""
+              )}
+              {user._id !== id && (
                 <Button
                   title="delete-user"
                   size="md"
-                  onClick={() => handleDelete(id)}
+                  onClick={() => handleDelete(user._id)}
                   sx={{
                     width: "75%",
                     background:
@@ -302,14 +354,32 @@ const UserProfile = ({ isDarkMode }) => {
                 >
                   <HoverIcon1 />
                 </Button>
-              ) : (
-                ""
               )}
             </Box>
+            <Popover
+          open={errorPopoverOpen}
+          anchorEl={errorPopoverAnchorRef.current}
+          onClose={() => setErrorPopoverOpen(false)}
+          anchorReference="anchorEl"
+          // anchorPosition={{ top: 100, left: 400 }}
+          anchorPosition={
+            (errorPopoverAnchorRef.current &&
+              getAnchorPosition(errorPopoverAnchorRef.current)) || {
+              top: 100,
+              left: 400,
+            }
+          }
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "center",
+          }}
+        >
+          <div style={{ padding: "20px" }}>{errorMessage}</div>
+        </Popover>
           </Box>
         ))}
     </Box>
   );
 };
 
-export default UserProfile;
+export default UserList;

@@ -428,37 +428,6 @@ const Item1 = () => {
         <Box ml="10px">
           <img
             alt=""
-            src={Flaxseed}
-            width="300px"
-            height="400px"
-            style={{
-              cursor: "pointer",
-              borderRadius: "10px",
-              boxShadow: "0 2px 4px rgba(1, 1, 1, 0.1)",
-            }}
-          />
-        </Box>
-        <Box mt="3px" ml="10px">
-          <Typography fontWeight="bold" sx={{ color: shades.secondary[500] }}>
-            Flaxseed
-          </Typography>
-
-          <Typography width="300px">
-            Flaxseed is commonly used to improve digestive health or relieve
-            constipation. Flaxseed may also help lower total blood cholesterol
-            and low-density lipoprotein (LDL, or "bad") cholesterol levels,
-            which may help reduce the risk of heart disease.
-          </Typography>
-        </Box>
-      </Box>
-      <Box
-        position="relative"
-        onMouseOver={() => setIsHovered(true)}
-        onMouseOut={() => setIsHovered(false)}
-      >
-        <Box ml="10px">
-          <img
-            alt=""
             src={Hempseed}
             width="300px"
             height="400px"

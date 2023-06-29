@@ -26,6 +26,9 @@ import Contact from "./scences/contact/Contact";
 import UserList from "./scences/userprofile/UserList";
 import Orders from "./scences/orders/Orders";
 import HerbInfo from "./scences/herb-info/HerbInfo";
+import Newsletter from "./scences/newsletter/Newsletter";
+
+import About from "./scences/contact/About";
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -124,6 +127,12 @@ function App() {
               }
             />
             <Route
+              path="/about"
+              element={
+                <About isDarkMode={isDarkMode} toggleDarkMode={toggleTheme} />
+              }
+            />
+            <Route
               path="/users"
               element={
                 <UserList
@@ -147,9 +156,18 @@ function App() {
                 />
               }
             />
+            <Route
+              path="/newsletter"
+              element={
+                <Newsletter
+                  isDarkMode={isDarkMode}
+                  toggleDarkMode={toggleTheme}
+                />
+              }
+            />
           </Routes>
-          <CartMenu />
-          <Footer />
+          <CartMenu isDarkMode={isDarkMode} />
+          <Footer isDarkMode={isDarkMode} />
         </BrowserRouter>
       </ContextProvider>
     </div>

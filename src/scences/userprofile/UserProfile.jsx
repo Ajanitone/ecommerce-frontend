@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Box, Typography, IconButton, InputBase, Button } from "@mui/material";
-import FilterVintageIcon from "@mui/icons-material/FilterVintage";
+import { Box,  IconButton, InputBase, Button } from "@mui/material";
+
 import { HerbContext } from "../../context/Context";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ColorRing } from "react-loader-spinner";
 import profilePicture from "../../assets/angele-kamp-kcvRHtAyuig-unsplash.jpg";
 import axios from "axios";
@@ -10,6 +10,29 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteSweepOutlinedIcon from "@mui/icons-material/DeleteSweepOutlined";
 import { styled } from "@mui/system";
 import Input from "../../components/Input";
+import Logo from "../../logo/TRI_Logo_Herbs_RedBlack+Face.png";
+
+
+
+
+
+
+const HoverIcon = styled(EditNoteOutlinedIcon)`
+font-size: 30px;
+transition: color 0.3s; /* Add a transition for a smooth effect */
+
+&:hover {
+  color: red; /* Set the desired color on hover */
+}
+`;
+const HoverIcon1 = styled(DeleteSweepOutlinedIcon)`
+font-size: 30px;
+transition: color 0.3s; /* Add a transition for a smooth effect */
+
+&:hover {
+  color: red; /* Set the desired color on hover */
+}
+`;
 
 const UserProfile = ({ isDarkMode }) => {
   const { state, dispatchState } = useContext(HerbContext);
@@ -20,38 +43,28 @@ const UserProfile = ({ isDarkMode }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   // Define a styled component with custom CSS
-  const HoverIcon = styled(EditNoteOutlinedIcon)`
-    font-size: 30px;
-    transition: color 0.3s; /* Add a transition for a smooth effect */
-
-    &:hover {
-      color: red; /* Set the desired color on hover */
-    }
-  `;
-  const HoverIcon1 = styled(DeleteSweepOutlinedIcon)`
-    font-size: 30px;
-    transition: color 0.3s; /* Add a transition for a smooth effect */
-
-    &:hover {
-      color: red; /* Set the desired color on hover */
-    }
-  `;
+ 
   const backgroundColor = isDarkMode ? "#000000" : "rgba(242, 38, 19, 0.4)";
 
   const navigate = useNavigate();
   const handleDelete = async (id) => {
     setLoading(true);
+    const token = localStorage.getItem('token'); // Retrieve the token from local storage
+
     const response = await axios.delete(baseUrl + "/users/delete/" + id, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       withCredentials: true,
     });
     console.log("^handleDelete ~ response", response);
 
     if (response.data.success) setLoading(false);
     dispatchState({
-      type: "logout",
-      // payload: id,
+      type: "removeUser",
+       payload: id,
     });
-    alert("Your account was deleted successfully");
+    alert("Your account was deleted ");
     return;
   };
 
@@ -97,9 +110,10 @@ const UserProfile = ({ isDarkMode }) => {
         }}
       />
       <IconButton title="logo">
-        <FilterVintageIcon
-          fontSize="large"
-          sx={{ color: "rgba(207, 9, 9, 0.4)", mb: "10px" }}
+        <img
+          src={Logo}
+          alt="web-logo"
+          style={{ width: "30px", height: "30px", borderRadius: "50%" }}
         />
       </IconButton>
       <Box title="image">
