@@ -2,11 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Box, Typography, useTheme, Button } from "@mui/material";
-
 import { shades } from "../theme";
-
 import { useNavigate } from "react-router-dom";
-
+import "./Item1.css"
 const Item1 = ({ item, width, handleDelete }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,7 +22,7 @@ const Item1 = ({ item, width, handleDelete }) => {
         onMouseOver={() => setIsHovered(true)}
         onMouseOut={() => setIsHovered(false)}
       >
-        <img
+        <img className="image"
           alt={item.name}
           src={item.profileImage}
           width="300px"

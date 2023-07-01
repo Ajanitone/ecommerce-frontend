@@ -1,6 +1,7 @@
 import { TextField, Button, Paper, Typography, Box } from "@mui/material";
 import React, { useState } from "react";
 import "./Contact.css";
+import ScrollTop from "../../components/ScrollTop"
 
 function Contact({ isDarkMode, toggleDarkMode }) {
   function sendEmail() {
@@ -15,6 +16,7 @@ function Contact({ isDarkMode, toggleDarkMode }) {
 
   return (
     <div className="w-[screen] border-2 border-red-600 bg-[#EECDB2] text-[#110931]">
+     <ScrollTop isDarkMode={isDarkMode}/>
       <div className="border-2  gap-5 max-w-[full] mx-auto min-w-[360px] overflow-hidden items-center bg-[#FFF3E9] text-[#110931]">
         <Box
           className="contact-box"

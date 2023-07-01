@@ -15,7 +15,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ColorRing } from "react-loader-spinner";
 import profilePicture from "../../assets/angele-kamp-kcvRHtAyuig-unsplash.jpg";
-
+import ScrollTop from "../../components/ScrollTop"
 <ColorRing
   visible={true}
   height="80"
@@ -36,179 +36,182 @@ const Settings = ({ isDarkMode }) => {
   const navigate = useNavigate();
 
   return (
-    <Box
-      position="fixed"
-      right="0"
-      bottom="0"
-      width="max(400px,30%)"
-      height="75%"
-      backgroundColor="white"
-    >
-      {/* Add gradient border pseudo-element */}
+    <Box>
+    <ScrollTop isDarkMode={isDarkMode}/>
       <Box
-        position="absolute"
-        top={0}
-        left={0}
-        right={0}
-        bottom={0}
-        zIndex={-1}
-        sx={{
-          content: '""',
-          position: "absolute",
-          background:
-            "linear-gradient(to right, rgba(120, 9, 9, 0.2), #f5f3f4)",
-          borderRadius: "10px",
-          pointerEvents: "none",
-        }}
-      />
-      <Box
-        p="4px 4px"
-        m="15px auto"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        width="75%"
-        backgroundColor="#F2F2F2"
-        sx={{ borderRadius: "5px", marginTop: "70px" }} // Add borderRadius style
+        position="fixed"
+        right="0"
+        bottom="0"
+        width="max(400px,30%)"
+        height="75%"
+        backgroundColor="white"
       >
-        {loading ? (
-          <ColorRing />
-        ) : (
-          <Button
-            size="md"
-            onClick={() => navigate("/addproduct")}
-            sx={{
-              width: "50%",
-              background:
-                "linear-gradient(to right, rgba(100, 9, 9, 0.2), #f5f3f4)",
-              marginTop: "10px",
-              color: "red",
-              "&:hover": { color: "white" },
-            }}
-          >
-            Add-Product
-          </Button>
-        )}
-      </Box>
-      <Box
-        p="4px 4px"
-        m="15px auto"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        width="75%"
-        backgroundColor="#F2F2F2"
-        sx={{ borderRadius: "5px", marginTop: "70px" }} // Add borderRadius style
-      >
-        {loading ? (
-          <ColorRing />
-        ) : (
-          <Button
-            className="w-100 mb-4"
-            size="md"
-            onClick={() => navigate("/products")}
-            sx={{
-              width: "50%",
-              background:
-                "linear-gradient(to right, rgba(100, 9, 9, 0.2), #f5f3f4)",
-              marginTop: "10px",
-              color: "red",
-              "&:hover": { color: "white" },
-            }}
-          >
-            Products
-          </Button>
-        )}
-      </Box>{" "}
-      <Box
-        p="4px 4px"
-        m="15px auto"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        width="75%"
-        backgroundColor="#F2F2F2"
-        sx={{ borderRadius: "5px", marginTop: "70px" }} // Add borderRadius style
-      >
-        {loading ? (
-          <ColorRing />
-        ) : (
-          <Button
-            className="w-100 mb-4"
-            size="md"
-            onClick={() => navigate("/users")}
-            sx={{
-              width: "50%",
-              background:
-                "linear-gradient(to right, rgba(100, 9, 9, 0.2), #f5f3f4)",
-              marginTop: "10px",
-              color: "red",
-              "&:hover": { color: "white" },
-            }}
-          >
-            Users
-          </Button>
-        )}
-      </Box>
-      <Box
-        p="4px 4px"
-        m="15px auto"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        width="75%"
-        backgroundColor="#F2F2F2"
-        sx={{ borderRadius: "5px", marginTop: "70px" }} // Add borderRadius style
-      >
-        {loading ? (
-          <ColorRing />
-        ) : (
-          <Button
-            className="w-100 mb-4"
-            size="md"
-            onClick={() => navigate("/orders")}
-            sx={{
-              width: "50%",
-              background:
-                "linear-gradient(to right, rgba(100, 9, 9, 0.2), #f5f3f4)",
-              marginTop: "10px",
-              color: "red",
-              "&:hover": { color: "white" },
-            }}
-          >
-            Orders
-          </Button>
-        )}
-      </Box>
-      <Box
-        p="4px 4px"
-        m="15px auto"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        width="75%"
-        backgroundColor="#F2F2F2"
-        sx={{ borderRadius: "5px", marginTop: "70px" }} // Add borderRadius style
-      >
-        {loading ? (
-          <ColorRing />
-        ) : (
-          <Button
-            className="w-100 mb-4"
-            size="md"
-            onClick={() => navigate("/newsletter")}
-            sx={{
-              width: "50%",
-              background:
-                "linear-gradient(to right, rgba(100, 9, 9, 0.2), #f5f3f4)",
-              marginTop: "10px",
-              color: "red",
-              "&:hover": { color: "white" },
-            }}
-          >
-            Newsletter
-          </Button>
-        )}
+        {/* Add gradient border pseudo-element */}
+        <Box
+          position="absolute"
+          top={0}
+          left={0}
+          right={0}
+          bottom={0}
+          zIndex={-1}
+          sx={{
+            content: '""',
+            position: "absolute",
+            background:
+              "linear-gradient(to right, rgba(120, 9, 9, 0.2), #f5f3f4)",
+            borderRadius: "10px",
+            pointerEvents: "none",
+          }}
+        />
+        <Box
+          p="4px 4px"
+          m="15px auto"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          width="75%"
+          backgroundColor="#F2F2F2"
+          sx={{ borderRadius: "5px", marginTop: "70px" }} // Add borderRadius style
+        >
+          {loading ? (
+            <ColorRing />
+          ) : (
+            <Button
+              size="md"
+              onClick={() => navigate("/addproduct")}
+              sx={{
+                width: "50%",
+                background:
+                  "linear-gradient(to right, rgba(100, 9, 9, 0.2), #f5f3f4)",
+                marginTop: "10px",
+                color: "red",
+                "&:hover": { color: "white" },
+              }}
+            >
+              Add-Product
+            </Button>
+          )}
+        </Box>
+        <Box
+          p="4px 4px"
+          m="15px auto"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          width="75%"
+          backgroundColor="#F2F2F2"
+          sx={{ borderRadius: "5px", marginTop: "70px" }} // Add borderRadius style
+        >
+          {loading ? (
+            <ColorRing />
+          ) : (
+            <Button
+              className="w-100 mb-4"
+              size="md"
+              onClick={() => navigate("/products")}
+              sx={{
+                width: "50%",
+                background:
+                  "linear-gradient(to right, rgba(100, 9, 9, 0.2), #f5f3f4)",
+                marginTop: "10px",
+                color: "red",
+                "&:hover": { color: "white" },
+              }}
+            >
+              Products
+            </Button>
+          )}
+        </Box>{" "}
+        <Box
+          p="4px 4px"
+          m="15px auto"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          width="75%"
+          backgroundColor="#F2F2F2"
+          sx={{ borderRadius: "5px", marginTop: "70px" }} // Add borderRadius style
+        >
+          {loading ? (
+            <ColorRing />
+          ) : (
+            <Button
+              className="w-100 mb-4"
+              size="md"
+              onClick={() => navigate("/users")}
+              sx={{
+                width: "50%",
+                background:
+                  "linear-gradient(to right, rgba(100, 9, 9, 0.2), #f5f3f4)",
+                marginTop: "10px",
+                color: "red",
+                "&:hover": { color: "white" },
+              }}
+            >
+              Users
+            </Button>
+          )}
+        </Box>
+        <Box
+          p="4px 4px"
+          m="15px auto"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          width="75%"
+          backgroundColor="#F2F2F2"
+          sx={{ borderRadius: "5px", marginTop: "70px" }} // Add borderRadius style
+        >
+          {loading ? (
+            <ColorRing />
+          ) : (
+            <Button
+              className="w-100 mb-4"
+              size="md"
+              onClick={() => navigate("/orders")}
+              sx={{
+                width: "50%",
+                background:
+                  "linear-gradient(to right, rgba(100, 9, 9, 0.2), #f5f3f4)",
+                marginTop: "10px",
+                color: "red",
+                "&:hover": { color: "white" },
+              }}
+            >
+              Orders
+            </Button>
+          )}
+        </Box>
+        <Box
+          p="4px 4px"
+          m="15px auto"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          width="75%"
+          backgroundColor="#F2F2F2"
+          sx={{ borderRadius: "5px", marginTop: "70px" }} // Add borderRadius style
+        >
+          {loading ? (
+            <ColorRing />
+          ) : (
+            <Button
+              className="w-100 mb-4"
+              size="md"
+              onClick={() => navigate("/newsletter")}
+              sx={{
+                width: "50%",
+                background:
+                  "linear-gradient(to right, rgba(100, 9, 9, 0.2), #f5f3f4)",
+                marginTop: "10px",
+                color: "red",
+                "&:hover": { color: "white" },
+              }}
+            >
+              Newsletter
+            </Button>
+          )}
+        </Box>
       </Box>
     </Box>
   );

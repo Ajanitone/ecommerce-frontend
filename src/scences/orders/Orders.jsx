@@ -8,6 +8,7 @@ import { Popover } from "@mui/material";
 import axios from "axios";
 
 import Item3 from "../../components/Item3";
+import ScrollTop from "../../components/ScrollTop"
 
 <ColorRing
   visible={true}
@@ -18,7 +19,7 @@ import Item3 from "../../components/Item3";
   wrapperClass="blocks-wrapper"
   colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
 />;
-const Orders = () => {
+const Orders = ({isDarkMode}) => {
   const { state, dispatchState } = useContext(HerbContext);
   const [loading, setLoading] = useState(false);
   const baseUrl = process.env.REACT_APP_BASE_URL;
@@ -97,6 +98,7 @@ const Orders = () => {
       display="flex"
       ref={errorPopoverAnchorRef}
     >
+    <ScrollTop isDarkMode={isDarkMode}/>
       {loading ? (
         <ColorRing />
       ) : (

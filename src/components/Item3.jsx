@@ -34,19 +34,19 @@ const Item1 = ({ item, width, handleDelete }) => {
         {item.products.map((product) => (
           <Box>
             <img
-              alt={product._id.name}
-              src={product._id.profileImage}
+              alt={product._id?.name}
+              src={product._id?.profileImage}
               width="300px"
               height="400px"
-              onClick={() => navigate(`/item/${product._id._id}`)}
+              onClick={() => navigate(`/item/${product._id?._id}`)}
               style={{
                 cursor: "pointer",
                 borderRadius: "10px",
                 boxShadow: "0 2px 4px rgba(1, 1, 1, 0.1)",
               }}
             />
-            <Typography>{product._id.name}</Typography>
-            <Typography>{product._id.price}€</Typography>
+            <Typography>{product._id?.name}</Typography>
+            <Typography>{product._id?.price}€</Typography>
           </Box>
         ))}
         <Box

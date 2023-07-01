@@ -11,6 +11,15 @@ const Footer = ({ isDarkMode }) => {
     palette: { neutral },
   } = useTheme();
   const copyRight = new Date().getFullYear();
+
+
+  function sendEmail() {
+    let email = 'info@trikaniamusic.de';
+    let subject = 'Subject of the email';
+    let body = 'Body of the email';
+    
+    window.location.href = 'mailto:' + email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  }
   return (
     <Box
       mt="70px"
@@ -36,14 +45,16 @@ const Footer = ({ isDarkMode }) => {
         }}
       >
         <Box width="clamp(20%,30%,40%)">
-          <Typography
-            variant="h4"
-            fontWeight="bold"
-            mb="30px"
-            color={shades.secondary[500]}
-          >
-            TrikaniaHerbs
-          </Typography>
+          <Button onClick={()=> navigate("/")}>
+            <Typography
+              variant="h6"
+              fontWeight="bold"
+              mb="30px"
+              color={shades.secondary[500]}
+            >
+              TrikaniaHerbs
+            </Typography>
+          </Button>
           <div>
             {" "}
             <p>Berlin {copyRight}</p>
@@ -99,14 +110,14 @@ const Footer = ({ isDarkMode }) => {
             p="40px 0"
             sx={{
               color: isDarkMode ? "white" : "black",
-            }}
+            }} onClick={() => navigate("/terms")}
           >
             Terms And Conditions
           </Button>
           <Button
             sx={{
               color: isDarkMode ? "white" : "black",
-            }}
+            }}  onClick={() => navigate("/privacy")}
           >
             Privacy Policy
           </Button>
@@ -156,11 +167,23 @@ const Footer = ({ isDarkMode }) => {
             </Button>
           </Typography>
           <Typography mb="30px">
-            {" "}
-            Clayallee 227<br></br>14195 Berlin
+            
+          <a
+    href="https://www.google.com/maps/search/?api=1&query=Clayallee%20227%2C%2014195%20Berlin"
+    target="_blank"
+    rel="noopener noreferrer" style={{color:"black",textDecoration:"none"}}
+  >
+    Clayallee 227<br />14195 Berlin
+  </a>
           </Typography>
-          <Typography mb="30px">Email: info@trikaniamusic.de</Typography>
-          <Typography mb="30px"> (+49)152-28503977</Typography>
+          <Button onClick={sendEmail}>
+            <Typography mb="10px" p="2px">Email: info@trikaniamusic.de</Typography>
+          </Button>
+          <Button >
+            <a href="tel:+4915228503977" style={{color:"black",textDecoration:"none"}}>
+               <Typography mb="10px">Tel: (+49)152-28503977</Typography>
+            </a>
+          </Button>
         </Box>
       </Box>
     </Box>

@@ -2,10 +2,12 @@ import { Typography, Box } from "@mui/material";
 import React from "react";
 import "./About.css";
 import { shades } from "../../theme";
+import ScrollTop from "../../components/ScrollTop";
 
 const About = ({ isDarkMode }) => {
   return (
     <div>
+       <ScrollTop isDarkMode={isDarkMode}/>
       <Box
         sx={{
           height: "100vh",

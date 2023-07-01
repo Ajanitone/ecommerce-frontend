@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-
+import ScrollTop from "../../components/ScrollTop";
 import axios from "axios";
 import { HerbContext } from "../../context/Context";
 import { useNavigate } from "react-router-dom";
@@ -62,71 +62,74 @@ function Wishlist() {
   }, []);
 
   return (
-    <Box
-      padding="10px"
-      width="100%"
-      margin="80px auto"
-      textAlign="center"
-      sx={{
-        background: "hsla(0, 0%, 100%, 0.55)",
-        backdropFilter: "blur(30px)",
-        // backgroundColor: "rgba(201, 38, 19, 0.1)",
-        borderRadius: "5px",
-        boxShadow: "0 2px 4px rgba(1, 1, 1, 0.1)",
-        border: "none",
-        // backgroundImage: "linear-gradient(to right, #f8f9fa, #ced4da)",
-        position: "relative", // Add position relative
-        overflow: "hidden", // Add overflow hidden
-      }}
-    >
-      <Box>
-        <Typography
-          variant="h5"
-          mb="15px"
-          sx={{
-            color: "red",
-            cursor: "pointer",
-            "&:hover": { color: "black" },
-          }}
-        >
-          Wishlist
-        </Typography>
-      </Box>
+    <Box>
+    <ScrollTop/>
       <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        gap="20px"
+        padding="10px"
+        width="100%"
+        margin="80px auto"
+        textAlign="center"
+        sx={{
+          background: "hsla(0, 0%, 100%, 0.55)",
+          backdropFilter: "blur(30px)",
+          // backgroundColor: "rgba(201, 38, 19, 0.1)",
+          borderRadius: "5px",
+          boxShadow: "0 2px 4px rgba(1, 1, 1, 0.1)",
+          border: "none",
+          // backgroundImage: "linear-gradient(to right, #f8f9fa, #ced4da)",
+          position: "relative", // Add position relative
+          overflow: "hidden", // Add overflow hidden
+        }}
       >
-        {wishlist?.length ? (
-          wishlist?.map((item) => (
-            <Box display="flex" justifyContent="space-between" key={item._id}>
-              <Item1 item={item} width={300} />
-              <Box
-                // position="absolute"
-                // top="12%"
-                // left="0"
-                title="delete"
-                width="30%"
-              >
-                <ClearOutlinedIcon
-                  sx={{
-                    color: "black",
-                    cursor: "pointer",
-                    border: "1px solid black",
-                    borderRadius: "50%",
-                    "&:hover": { color: "red", border: "1px solid red" },
-                  }}
-                  onClick={() => handleDelete(item._id)}
-                />
+        <Box>
+          <Typography
+            variant="h5"
+            mb="15px"
+            sx={{
+              color: "red",
+              cursor: "pointer",
+              "&:hover": { color: "black" },
+            }}
+          >
+            Wishlist
+          </Typography>
+        </Box>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          gap="20px"
+        >
+          {wishlist?.length ? (
+            wishlist?.map((item) => (
+              <Box display="flex" justifyContent="space-between" key={item._id}>
+                <Item1 item={item} width={300} />
+                <Box
+                  // position="absolute"
+                  // top="12%"
+                  // left="0"
+                  title="delete"
+                  width="30%"
+                >
+                  <ClearOutlinedIcon
+                    sx={{
+                      color: "black",
+                      cursor: "pointer",
+                      border: "1px solid black",
+                      borderRadius: "50%",
+                      "&:hover": { color: "red", border: "1px solid red" },
+                    }}
+                    onClick={() => handleDelete(item._id)}
+                  />
+                </Box>
               </Box>
+            ))
+          ) : (
+            <Box>
+              <Typography variant="h7">Your wishlist is empty</Typography>
             </Box>
-          ))
-        ) : (
-          <Box>
-            <Typography variant="h7">Your wishlist is empty</Typography>
-          </Box>
-        )}
+          )}
+        </Box>
       </Box>
     </Box>
   );

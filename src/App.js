@@ -27,6 +27,8 @@ import UserList from "./scences/userprofile/UserList";
 import Orders from "./scences/orders/Orders";
 import HerbInfo from "./scences/herb-info/HerbInfo";
 import Newsletter from "./scences/newsletter/Newsletter";
+import Terms from "./scences/terms/Terms";
+import Privacy from "./scences/terms/Privacy"
 
 import About from "./scences/contact/About";
 const ScrollToTop = () => {
@@ -160,6 +162,24 @@ function App() {
               path="/newsletter"
               element={
                 <Newsletter
+                  isDarkMode={isDarkMode}
+                  toggleDarkMode={toggleTheme}
+                />
+              }
+            />
+             <Route
+              path="/terms"
+              element={
+                <Terms
+                  isDarkMode={isDarkMode}
+                  toggleDarkMode={toggleTheme}
+                />
+              }
+            />
+             <Route
+              path="/privacy"
+              element={
+                <Privacy
                   isDarkMode={isDarkMode}
                   toggleDarkMode={toggleTheme}
                 />

@@ -10,6 +10,7 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteSweepOutlinedIcon from "@mui/icons-material/DeleteSweepOutlined";
 import { styled } from "@mui/system";
 import Input from "../../components/Input";
+import ScrollTop from "../../components/ScrollTop";
 
 const Newsletter = ({ isDarkMode }) => {
   const { state, dispatchState } = useContext(HerbContext);
@@ -124,6 +125,7 @@ const Newsletter = ({ isDarkMode }) => {
 
   return (
     <Box>
+    <ScrollTop isDarkMode={isDarkMode}/>
       <Box>
         {state.newsletters &&
           state.newsletters.map((news) => (

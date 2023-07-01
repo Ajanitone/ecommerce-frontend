@@ -18,8 +18,8 @@ import DeleteSweepOutlinedIcon from "@mui/icons-material/DeleteSweepOutlined";
 import { styled } from "@mui/system";
 import Item1 from "../../components/Item1";
 import { ProductionQuantityLimits } from "@mui/icons-material";
-
-const Product = () => {
+import ScrollTop from "../../components/ScrollTop";
+const Product = ({isDarkMode}) => {
   const { state, dispatchState } = useContext(HerbContext);
   const [loading, setLoading] = useState(false);
   const baseUrl = process.env.REACT_APP_BASE_URL;
@@ -87,34 +87,38 @@ const Product = () => {
   }, []);
 
   return (
-    <Box
-      padding="10px"
-      width="80%"
-      margin="80px auto"
-      textAlign="center"
-      sx={{
-        background: "hsla(1, 0%, 100%, 0.55)",
-        backdropFilter: "blur(30px)",
-        borderRadius: "5px",
-        display: isNonMobile ? "flex" : "block",
-        border: "none",
-        position: "relative",
-        overflow: "hidden",
-        padding: "15px 0",
-      }}
-      position="relative"
-      onMouseOver={() => setIsHovered(true)}
-      onMouseOut={() => setIsHovered(false)}
-      display="flex"
-    >
-      {state.products.map((item) => (
-        <Item1
-          item={item}
-          width={600}
-          handleDelete={handleDelete}
-          id={item._id}
-        />
-      ))}
+    <Box>
+      <ScrollTop isDarkMode={isDarkMode}/>
+      <Box
+        padding="10px"
+        width="80%"
+        margin="80px auto"
+        textAlign="center"
+        sx={{
+          background: "hsla(1, 0%, 100%, 0.55)",
+          backdropFilter: "blur(30px)",
+          borderRadius: "5px",
+          display: isNonMobile ? "flex" : "block",
+          border: "none",
+          position: "relative",
+          overflow: "hidden",
+          padding: "15px 0",
+        }}
+        position="relative"
+        onMouseOver={() => setIsHovered(true)}
+        onMouseOut={() => setIsHovered(false)}
+        display="flex"
+      >
+      
+        {state.products.map((item) => (
+          <Item1
+            item={item}
+            width={600}
+            handleDelete={handleDelete}
+            id={item._id}
+          />
+        ))}
+      </Box>
     </Box>
   );
 };
