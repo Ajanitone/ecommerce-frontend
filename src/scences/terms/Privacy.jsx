@@ -10,7 +10,7 @@ import { shades } from '../../theme';
 const Terms = ({isDarkMode}) => {
 
 
-    const backgroundColor = isDarkMode ? "#000000" : "rgba(242, 38, 19, 0.4)";
+    const backgroundColor = isDarkMode ? "#000000" : "";
   return (
     <Box>
      <ScrollTop isDarkMode={isDarkMode}/>
@@ -24,48 +24,33 @@ const Terms = ({isDarkMode}) => {
         backgroundColor: backgroundColor,
         backdropFilter: "blur(30px)",
         borderRadius: "10px",
-        boxShadow: "0 2px 4px rgba(1, 1, 1, 0.1)",
+        boxShadow: "0 1px 2px rgba(1, 1, 1, 0.1)",
         border: "none",
-        // backgroundImage: "linear-gradient(to right, #2a9d8f, #f4a261)",
         position: "relative", // Add position relative
         overflow: "hidden", // Add overflow hidden
       }}
       
         >
-      {/* Add gradient border pseudo-element */}
-      <Box
-        position="absolute"
-        top={0}
-        left={0}
-        right={0}
-        bottom={0}
-        zIndex={-1}
-        sx={{
-          content: '""',
-          position: "absolute",
-          background: isDarkMode
-            ? "linear-gradient(to right, #1d3557, #000000)"
-            : "linear-gradient(to right, rgba(207, 9, 9, 0.2), #f5f3f4)",
-          borderRadius: "10px",
-          pointerEvents: "none",
-        }}
-      />
+    
        <Box>
        <Typography variant='h4'>Privacy Policy</Typography>
        </Box>
        <Box>
       <Typography fontWeight="bold" mt="1rem" color={isDarkMode?"white": shades.primary[300]}>
-      in the context of sales contracts that are concluded via the online shop trikania-herbs.de.
+      The following information gives you an overview of the processing of your personal data when you visit the website trikania-herbs.de..
       </Typography>
        </Box>
        <Box>
-      <Typography fontWeight="bold" color={ shades.secondary[500]} mt="1rem">§ 1 Scope</Typography>
+       <Typography mt="2rem">Personal data is all data that can be assigned to you individually or with which you can be personally identified.</Typography>
+       <Typography mt="2rem">Processing is any process carried out with or without the help of automated processes or any such series of processes in connection with personal data such as collecting, recording, organizing, arranging, storing, adapting or changing, reading out, querying, using, disclosure by transmission, distribution or any other form of making available, matching or linking, restriction, deletion or destruction.</Typography>
+       <Typography mt="2rem">Processing is any process carried out with or without the help of automated processes or any such series of processes in connection with personal data such as collecting, recording, organizing, arranging, storing, adapting or changing, reading out, querying, using, disclosure by transmission, distribution or any other form of making available, matching or linking, restriction, deletion or destruction.</Typography>
+       <Typography mt="2rem">We will inform you below about who is responsible for data processing and who you can contact if you have any questions. We will also inform you about what data we collect from you and how we use it. We will also inform you about your rights under applicable data protection law.</Typography>
        </Box>
        <Box>
-      <Typography mt="2rem">1. The following terms and conditions apply to all contracts concluded between Trikania-Herbs and the customer via the online shop "trikania-herbs.de", unless expressly agreed otherwise. Deviating conditions of the customer are not recognized unless they have been expressly agreed to.</Typography>
+      <Typography mt="2rem" fontWeight="bold" color={isDarkMode?"white": shades.secondary[500]}>1. Who is responsible for data processing?</Typography>
        </Box>
        <Box>
-      <Typography mt="2rem">2. The contractual partner for all orders is:</Typography>
+      <Typography mt="2rem">Ttikania-herbs gbr is responsible for the processing of your personal data when you visit the website trikania-herbs.de. The contact details are:</Typography>
        </Box>
        <Box color={isDarkMode?"white": shades.primary[600]}>
       <Typography mt="10px" fontWeight="bold">Trikania-Herbs gbr.</Typography>
@@ -73,48 +58,49 @@ const Terms = ({isDarkMode}) => {
       <Typography mt="10px" fontWeight="bold">Clayallee 227,14195 Berlin</Typography>
       <Typography mt="10px" fontWeight="bold">Tel:015228503977</Typography>
       <Typography mt="10px" fontWeight="bold">Email:info@trikaniamusic.de</Typography>
-      <Typography mt="20px" fontWeight="bold">District Court of Berlin,HRB 137891</Typography>
-      <Typography mt="2rem" fontWeight="bold">VAT ID: DE 215275903</Typography>
+    
        </Box>
        <Box mt="2rem">
       <Typography fontWeight="bold" color={ shades.secondary[500]}>
-      § 2 Conclusion of the contract / storage of the contract text
+      2.What data do we process from you when you visit our website?
+      </Typography>
+      <Typography mt="2rem" fontWeight="bold" color={ shades.secondary[300]}>
+      2.1 Collection of general data and logs when visiting the website
       </Typography>
       <Box>
-          <Typography mt="1rem">1.The presentation of the products in the online shop does not represent a legally binding offer, but a non-binding online catalogue.</Typography>
-          <Typography mt="1rem">2.To purchase our goods, you can click on the desired products on the website www.trikania-herbs.de and place them in the shopping cart. At the end of your order you will receive an overview of the goods in the shopping cart, stating the price, delivery costs and VAT. Before sending your order, you have the opportunity to check all entries, such as name, address, delivery address, number and type of goods, payment details and to make changes or corrections.</Typography>
-          <Typography mt="1rem">3.By clicking on the "Buy" / "Order with obligation to pay" button, you then place a binding order for the goods contained in the shopping cart.</Typography>
-          <Typography mt="1rem">4.The receipt of your order is confirmed together with the acceptance of the order immediately after it has been sent by automated e-mail. With this e-mail confirmation, the purchase contract has come about.</Typography>
-          <Typography mt="1rem">5.The text of the contract is saved by us. You can print this out after sending your order to us by clicking on the "Print" button. We will also send you an order confirmation with all order data and our general terms and conditions to the email address you provided.
-          .</Typography>
+          <Typography mt="1rem">When you visit our website, the provider of the website automatically collects and stores information in so-called server log files. The data is automatically transmitted to us by your browser. These are:</Typography>
+          <Box color={isDarkMode?"white": shades.primary[600]}>
+            <Typography mt="15px">• Website visited</Typography>
+            <Typography mt="5px">• Time and date of access</Typography>
+            <Typography mt="5px">• Amount of data sent in bytes</Typography>
+            <Typography mt="5px">• Source/reference from which page you came to our site</Typography>
+            <Typography mt="5px">• Browser used</Typography>
+            <Typography mt="5px">• Operating system used</Typography>
+            <Typography mt="5px">• IP address used</Typography>
+            <Typography mt="2rem">The data is not merged with other data sources.</Typography>
+          </Box>
+         
       
       </Box>
       <Box>
-      <Typography fontWeight="bold" color={ shades.secondary[500]} mt="2rem">§ 3 Subject matter of contract,product quality,availability</Typography>
+      <Typography fontWeight="bold" color={ shades.secondary[500]} mt="2rem">Purpose of data collection / legal basis:</Typography>
       <Box>
-      <Typography mt="1rem">1.The subject matter of the contract are the goods and final prices specified and confirmed in the order.
-      <Typography mt="1rem">2.The quality of the ordered goods results from the product description in the online shop. Images on the website are for illustrative purposes only and may not accurately reflect the products.
-      </Typography>
-      <Typography mt="1rem">3.We strive to offer you the highest quality possible. Our extensive range is therefore subject to constant changes due to seasonal items or changes in suppliers. "If a product cannot be delivered at the time of dispatch, we will offer you a corresponding replacement product of at least the same value. In this case, as the customer, you are not obliged to purchase this replacement product. You will not suffer any disadvantages as a result.</Typography>
-          .</Typography>
+     <Typography mt="1rem">They help us to deliver the content of our website correctly, to ensure the functionality of the website, to optimize the content of our website and to ensure the security of our information technology systems. Our legitimate interest in data processing within the meaning of the legal basis of Article 6 (1) (f) GDPR lies in these purposes.</Typography>
+     
       </Box>
       <Box>
-      <Typography fontWeight="bold" color={ shades.secondary[500]} mt="2rem">§ 4 Prices,shipping costs</Typography>
+      <Typography fontWeight="bold" color={ shades.secondary[500]} mt="2rem">Storage duration:</Typography>
       <Box>
-      <Typography mt="1rem">1.The prices at the time the order is placed by the customer apply. The purchase price includes the respective statutory VAT.</Typography>
-      <Typography mt="1rem">2.The shipping costs for Germany are a flat rate of EUR 5.20. For Austria, France and Italy Euro 11.70. Belgium, Bulgaria, Netherlands, Luxembourg, Czech Republic, Poland, Estonia, Denmark, Finland, Greece, Ireland, Croatia, Latvia, Lithuania, Malta, Portugal, Romania, Sweden, Slovakia, Spain, Hungary, Cyprus Euro 13.90, Switzerland Euro 19.80 and Great Britain Euro 19.80. For other third countries, a flat-rate shipping fee of EUR 21.00 or more will be charged.</Typography>
-      <Typography mt="1rem">3.The shipping costs for Germany exclusively in the offer/action category are a flat rate of EUR 5.20.</Typography>
-      <Typography mt="1rem">4.Free shipping for Germany with the exception of the offer/action category for goods valued at EUR 100 or more.</Typography>
-      <Typography mt="1rem">5.Free shipping for Germany with the exception of the offer/action category for goods valued at EUR 100 or more.</Typography>
-      Shipping costs for express shipping (next day delivery if ordered before 12 p.m.) Monday-Thursday We ship Monday-Thursday (order received by 10 a.m.)
+      <Typography mt="1rem">The anonymous data of the server log files are stored for a maximum of 7 days and then deleted. If data has to be kept for reasons of proof, for example to clarify cases of misuse, the data are excluded from deletion until the incident has been finally clarified.</Typography>
+   
       </Box>
       </Box>
       <Box>
-      <Typography fontWeight="bold" color={ shades.secondary[500]} mt="2rem">§ 4 Payment,Shipping</Typography>
+      <Typography fontWeight="bold" color={ shades.secondary[300]} mt="2rem">2.2 Cookies</Typography>
       <Box>
-      <Typography mt="1rem">1.The purchase price is due upon conclusion of the contract. The purchase price consists of the purchase price and the flat-rate shipping fee, if such is charged.</Typography>
-      <Typography mt="1rem">2.Payment can be made by credit card (Mastercard/Visacard/American Express).</Typography>
-      <Typography mt="1rem">3.With every order, we reserve the right not to offer certain payment methods and to refer to other payment methods. If the customer's place of residence is outside of Germany, payment is only possible in advance.</Typography>
+      <Typography mt="1rem">We use cookies on our website. Cookies are small text files that are placed and saved on the hard drive of your end device. This cookie contains a characteristic character string that allows us to clearly identify the browser when it is called up again. No personal data is stored in the cookies we use. The cookies we use are also not merged with personal data.</Typography>
+     
+     
       
       </Box>
       </Box>

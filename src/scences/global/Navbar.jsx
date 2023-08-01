@@ -44,7 +44,7 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
   const [staticModal, setStaticModal] = useState(false);
   const toggleShow = () => setStaticModal(!staticModal);
   const open = Boolean(anchorEl);
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState({name:"",});
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -56,30 +56,28 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
     return { top: rect.top, left: rect.left };
   };
   const handleSearch = async () => {
-    if (searchValue.trim() === "") {
+    if (searchValue.name.trim() === "") {
       // If searchValue is empty or contains only whitespace, return or display an error message
       return;
     }
     setLoading(true);
-    const response = await axios.get(
-      baseUrl + "/products/searchProduct/" + encodeURIComponent(searchValue),
-      {
-        withCredentials: true,
-      }
-    );
-
+    const response = await axios.get(baseUrl + `/products/searchProduct/${searchValue.name.trim()}`, {
+      withCredentials: true,
+    });
+  
     console.log("search getData", response);
-
+  
     if (response.data.success) {
       dispatchState({
-        type: "searchProducts",
+        type: "loadProducts",
         payload: response.data.products,
       });
     }
     navigate(`/search-product`);
-    setSearchValue("");
+    setSearchValue({ name: "" });
     setLoading(false);
   };
+  
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -338,8 +336,8 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
       >
         <InputBase
           placeholder="Search products"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
+          value={searchValue.name}
+          onChange={(e) => setSearchValue({name:e.target.value})}
           sx={{ ml: 2, flex: 1 }}
           onKeyUp={(e) => {
             if (e.key === "Enter") {

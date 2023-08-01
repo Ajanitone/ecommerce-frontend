@@ -10,7 +10,7 @@ import { shades } from '../../theme';
 const Terms = ({isDarkMode}) => {
 
 
-    const backgroundColor = isDarkMode ? "#000000" : "rgba(242, 38, 19, 0.4)";
+    const backgroundColor = isDarkMode ? "#000000" : "none";
   return (
     <Box>
      <ScrollTop isDarkMode={isDarkMode}/>
@@ -24,7 +24,7 @@ const Terms = ({isDarkMode}) => {
         backgroundColor: backgroundColor,
         backdropFilter: "blur(30px)",
         borderRadius: "10px",
-        boxShadow: "0 2px 4px rgba(1, 1, 1, 0.1)",
+        boxShadow: "0 1px 2px rgba(1, 1, 1, 0.1)",
         border: "none",
         // backgroundImage: "linear-gradient(to right, #2a9d8f, #f4a261)",
         position: "relative", // Add position relative
@@ -32,24 +32,7 @@ const Terms = ({isDarkMode}) => {
       }}
       
         >
-      {/* Add gradient border pseudo-element */}
-      <Box
-        position="absolute"
-        top={0}
-        left={0}
-        right={0}
-        bottom={0}
-        zIndex={-1}
-        sx={{
-          content: '""',
-          position: "absolute",
-          background: isDarkMode
-            ? "linear-gradient(to right, #1d3557, #000000)"
-            : "linear-gradient(to right, rgba(207, 9, 9, 0.2), #f5f3f4)",
-          borderRadius: "10px",
-          pointerEvents: "none",
-        }}
-      />
+    
        <Box>
        <Typography variant='h4'> Terms and Conditions</Typography>
        </Box>

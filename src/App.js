@@ -20,7 +20,7 @@ import AddProduct from "./scences/product/AddProduct";
 import Product from "./scences/product/Product";
 import EditProduct from "./scences/product/EditProduct";
 import Wishlist from "./scences/wishlist/Wishlist";
-
+import AdminLayout from "./layouts/AdminLayout";
 import SearchResults from "./scences/product/SearchProduct";
 import Contact from "./scences/contact/Contact";
 import UserList from "./scences/userprofile/UserList";
@@ -97,22 +97,51 @@ function App() {
               path="/editprofile"
               element={<EditProfile isDarkMode={isDarkMode} />}
             />
-            <Route
-              path="/settings"
-              element={<Settings isDarkMode={isDarkMode} />}
+            <Route element={<AdminLayout/>}>
+              <Route
+                path="/settings"
+                element={<Settings isDarkMode={isDarkMode} />}
+              />
+              <Route
+                path="/addproduct"
+                element={<AddProduct isDarkMode={isDarkMode} />}
+              />
+              <Route
+                path="/products"
+                element={<Product isDarkMode={isDarkMode} />}
+              />
+              <Route
+                path="/edit-product/:id"
+                element={<EditProduct isDarkMode={isDarkMode} />}
+              />
+
+
+<Route
+              path="/users"
+              element={
+                <UserList
+                  isDarkMode={isDarkMode}
+                  toggleDarkMode={toggleTheme}
+                />
+              }
             />
             <Route
-              path="/addproduct"
-              element={<AddProduct isDarkMode={isDarkMode} />}
+              path="/orders"
+              element={
+                <Orders isDarkMode={isDarkMode} toggleDarkMode={toggleTheme} />
+              }
             />
-            <Route
-              path="/products"
-              element={<Product isDarkMode={isDarkMode} />}
+
+<Route
+              path="/newsletter"
+              element={
+                <Newsletter
+                  isDarkMode={isDarkMode}
+                  toggleDarkMode={toggleTheme}
+                />
+              }
             />
-            <Route
-              path="/edit-product/:id"
-              element={<EditProduct isDarkMode={isDarkMode} />}
-            />
+            </Route>
 
             <Route
               path="/wishlist"
@@ -134,21 +163,7 @@ function App() {
                 <About isDarkMode={isDarkMode} toggleDarkMode={toggleTheme} />
               }
             />
-            <Route
-              path="/users"
-              element={
-                <UserList
-                  isDarkMode={isDarkMode}
-                  toggleDarkMode={toggleTheme}
-                />
-              }
-            />
-            <Route
-              path="/orders"
-              element={
-                <Orders isDarkMode={isDarkMode} toggleDarkMode={toggleTheme} />
-              }
-            />
+          
             <Route
               path="/herb-info"
               element={
@@ -158,15 +173,7 @@ function App() {
                 />
               }
             />
-            <Route
-              path="/newsletter"
-              element={
-                <Newsletter
-                  isDarkMode={isDarkMode}
-                  toggleDarkMode={toggleTheme}
-                />
-              }
-            />
+          
              <Route
               path="/terms"
               element={
