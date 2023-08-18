@@ -1,6 +1,6 @@
 import React, { useState, useRef ,useEffect} from "react";
-import { Box, Typography, InputBase, Button, Popover } from "@mui/material";
-
+import { Box, Typography, InputBase, Button, Popover,useMediaQuery} from "@mui/material";
+import ScrollTop from "../../components/ScrollTop";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ColorRing } from "react-loader-spinner";
@@ -28,6 +28,7 @@ const Register = ({ isDarkMode }) => {
     const rect = anchorEl.getBoundingClientRect();
     return { top: rect.top, left: rect.left };
   };
+  const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const [data, setData] = useState({
     username: "",
@@ -138,7 +139,7 @@ const Register = ({ isDarkMode }) => {
     <Box
       padding="10px"
       width="80%"
-      margin="80px auto"
+      margin="100px auto"
       textAlign="center"
       sx={{
         background: "hsla(0, 0%, 100%, 0.55)",
@@ -303,6 +304,7 @@ const Register = ({ isDarkMode }) => {
       >
         <div style={{ padding: "20px" }}>{errorMessage}</div>
       </Popover>
+      <ScrollTop isDarkMode={isDarkMode}/>
     </Box>
   );
 };

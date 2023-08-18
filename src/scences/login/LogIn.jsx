@@ -152,7 +152,7 @@ const LogIn = ({ isDarkMode }) => {
       <Box
         padding="10px"
         width="80%"
-        margin="80px auto"
+        margin="100px auto"
         textAlign="center"
         sx={{
           background: "hsla(0, 0%, 100%, 0.55)",

@@ -53,4 +53,12 @@ export const theme = createTheme({
   h2: { fontFamily: ["Cinzel, sans-serif"].join(","), fontSize: 36 },
   h3: { fontFamily: ["Cinzel, sans-serif"].join(","), fontSize: 20 },
   h4: { fontFamily: ["Cinzel, sans-serif"].join(","), fontSize: 14 },
+  breakpoints: {
+    values: {
+      iphone12Mini: 360, // Your desired breakpoint for iPhone 12 Mini
+      iphone12: 390, // Your desired breakpoint for iPhone 12 and 12 Pro
+      iphone12ProMax: 428, // Your desired breakpoint for iPhone 12 Pro Max
+      // ... other breakpoints
+    },
+  },
 });

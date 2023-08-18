@@ -44,17 +44,25 @@ const Footer = ({ isDarkMode }) => {
           border: "none",
         }}
       >
-        <Box width="clamp(20%,30%,40%)">
-          <Button onClick={()=> navigate("/")}>
-            <Typography
-              variant="h6"
-              fontWeight="bold"
-              mb="30px"
-              color={shades.secondary[500]}
-            >
-              TrikaniaHerbs
-            </Typography>
-          </Button>
+        <Box width="clamp(20%,30%,40%)" display={isNonMobile ? "": "block" } >
+        <Button 
+  onClick={() => navigate("/")} 
+  sx={{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: isNonMobile ? 'flex-start' : 'center',textAlign: isNonMobile ? 'left' : 'center',
+  }}
+>
+  <Typography
+    variant="h6"
+    fontWeight="bold"
+    mb="30px"
+    color={shades.secondary[500]}
+  >
+    TrikaniaHerbs
+  </Typography>
+</Button>
+
           <div>
             {" "}
             <p>Berlin {copyRight}</p>

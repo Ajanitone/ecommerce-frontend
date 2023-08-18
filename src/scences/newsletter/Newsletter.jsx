@@ -133,7 +133,7 @@ const Newsletter = ({ isDarkMode }) => {
               className={`home ${isDarkMode ? "dark-mode" : ""}`}
               padding="10px"
               width="75%"
-              margin="80px auto"
+              margin="100px auto"
               textAlign="center"
               display="flex"
               sx={{

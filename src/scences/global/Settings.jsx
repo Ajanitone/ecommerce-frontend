@@ -39,30 +39,16 @@ const Settings = ({ isDarkMode }) => {
     <Box>
     <ScrollTop isDarkMode={isDarkMode}/>
       <Box
-        position="fixed"
-        right="0"
-        bottom="0"
+      marginTop="100px"
         width="max(400px,30%)"
         height="75%"
         backgroundColor="white"
+        sx={{
+        background: "linear-gradient(to right, rgba(120, 9, 9, 0.2), #f5f3f4)",
+        borderRadius: "10px"
+      }}
       >
-        {/* Add gradient border pseudo-element */}
-        <Box
-          position="absolute"
-          top={0}
-          left={0}
-          right={0}
-          bottom={0}
-          zIndex={-1}
-          sx={{
-            content: '""',
-            position: "absolute",
-            background:
-              "linear-gradient(to right, rgba(120, 9, 9, 0.2), #f5f3f4)",
-            borderRadius: "10px",
-            pointerEvents: "none",
-          }}
-        />
+        
         <Box
           p="4px 4px"
           m="15px auto"

@@ -47,6 +47,11 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
   const [searchValue, setSearchValue] = useState({name:"",});
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
+  const isMobile = useMediaQuery(theme => theme.breakpoints.down('sm'));
+
+
+
+
   const [errorMessage, setErrorMessage] = useState("");
 
   const [errorPopoverOpen, setErrorPopoverOpen] = useState(false);
@@ -128,9 +133,11 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
       zIndex="1"
       sx={{
         "&:hover": { cursor: "pointer", color: shades.secondary[500] },
-        display: isNonMobile ? "flex" : "block",
+        display: isNonMobile ? "flex" : "block", 
       }}
       ref={errorPopoverAnchorRef}
+    
+      
     >
       <Box
         sx={{
@@ -139,6 +146,7 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
         }}
         color={!isDarkMode ? shades.primary[500] : undefined}
         title="username"
+        
       >
         <Typography variant="h7">Hi, {state.user.username}</Typography>
       </Box>
@@ -166,9 +174,9 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
             alt="logo"
             style={{
               width: "30px",
-              height: "30px",
+              height:"30px",
               borderRadius: "50%",
-              marginLeft: "5px",
+              
             }}
           />
           <Typography sx={{ display: isNonMobile ? "block" : "none" }}>
@@ -179,7 +187,7 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
         <Box
           display="flex"
           justifyContent="space-between"
-          columnGap="20px"
+          columnGap={isNonMobile ? "20px":"10px"}
           zIndex="2"
         >
           {/* <IconButton
