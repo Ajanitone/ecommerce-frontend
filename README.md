@@ -43,7 +43,6 @@ Clone The repository
 - Cloudianry
 - Nodemailer
 - Elastic Email SMTP
-- Tailwind CSS
 - MUI
 - React Icons
 - CSS
