@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Trikania Herbs
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Coded by Kirk McDowell
+---
 
-## Available Scripts
+<img width="1440" alt="Screenshot 2023-09-02 at 22 21 28" src="https://github.com/Ajanitone/ecommerce-frontend/assets/90602516/ef3c80d2-7a5b-484a-98a4-ab702c7501f7">
 
-In the project directory, you can run:
+---
+### Description 
+This is an Ecommerce App, where you can register, login, edit your profile and of course buy products.
 
-### `npm start`
+<img width="1440" alt="Screenshot 2023-09-02 at 22 23 13" src="https://github.com/Ajanitone/ecommerce-frontend/assets/90602516/428ec772-0ccc-4cfc-80c4-7b3da6a485a7">
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Installation Instructions
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Clone The repository
 
-### `npm test`
+### Client Folder
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- npm install
+- npm run start
 
-### `npm run build`
+### Server Folder
+- npm install
+- npm run server
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+--
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Technologies used
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- React
+- JavaScript
+- Node JS
+- Express
+- Mongoose
+- MongoDB
+- Axios
+- Concurrently
+- JWT
+- CORS
+- Bcrypt
+- Cloudianry
+- Nodemailer
+- Elastic Email SMTP
+- Tailwind CSS
+- MUI
+- React Icons
+- CSS
+- React-Redux
+- Stripe
+- Formik
+- Yup
+---
+<img width="1440" alt="Screenshot 2023-09-02 at 22 22 04" src="https://github.com/Ajanitone/ecommerce-frontend/assets/90602516/c0789dd9-667b-4150-8b9a-0b3df0caa265">
+<img width="1440" alt="Screenshot 2023-09-02 at 22 25 26" src="https://github.com/Ajanitone/ecommerce-frontend/assets/90602516/c5a837ff-3125-46be-a427-116dad3b71f4">
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+https://trikania-herbs-client.vercel.app/
